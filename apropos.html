@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Echo des Oubliées</title>
+    <link rel="stylesheet" href="global.css">
+    <link rel="stylesheet" href="apropos.css">
+
+    <!-- Tailwind (utilities only, optional) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- D3 -->
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+</head>
+<body>
+    <nav class="navbar">
+         <a href="index.html"> <img src="images/logo.png" alt="logo"></a>
+
+          <!-- HAMBURGER BUTTON -->
+    <button class="menu-toggle">☰</button>
+        <ul class="nav-links">
+            <li><a href="index.html">Accueil</a></li>
+            <li><a href="apropos.html">À propos</a></li>
+            <li><a href="episodes.html">Épisodes</a></li>
+            <li><a href="partager.html">Contact</a></li>
+          
+        </ul>
+        
+    </nav>
+    <main>
+<section id="accueil" class="banner">
+  <div class="banner-content">
+    <h1>À propos</h1> 
+ <p> Echo des Oubliées est né d’un besoin simple mais essentiel : écouter les voix que l’on oublie trop souvent. 
+    Celles des femmes, des mères, des exilées, de toutes celles qui avancent dans le silence, 
+    avec courage et résilience. </p> 
+  </div>
+</section>
+ <!-- <section class="apro-hero"> <h1>À propos</h1> 
+  <p> Echo des Oubliées est né d’un besoin simple mais essentiel : écouter les voix que l’on oublie trop souvent. 
+    Celles des femmes, des mères, des exilées, de toutes celles qui avancent dans le silence, 
+    avec courage et résilience. </p> </section>  -->
+    <section class="apro-histoire">
+       <h2>Notre histoire</h2> 
+       <p> Tout a commencé avec une envie : créer un espace où chaque femme peut être entendue, reconnue et respectée. 
+        Episode après épisode, témoignage après témoignage, Echo des Oubliées est devenu bien plus qu’un simple projet. 
+        C’est un refuge, un lieu de partage et de transmission, un pont entre des vies différentes mais profondément humaines. 
+
+  </p>
+</section> 
+
+<!-- <section class="apro-valeurs"> <h2>Nos valeurs</h2>
+   <ul> 
+    <li><strong>Empathie :</strong> écouter sans juger, accueillir chaque parcours.</li> 
+    <li><strong>Respect :</strong> protéger les histoires confiées.</li> 
+    <li><strong>Sororité :</strong> créer des liens entre femmes, visibles ou invisibles.</li> 
+  </ul> 
+</section>  -->
+<section class="recent-podcasts">
+    <h2>Nos valeurs</h2>
+    <div class="podcast-cards">
+        <div class="podcast-card">
+             <img src="images/empatie.jpg" alt="empathiecover">
+            <p><strong>Empathie :</strong> écouter sans juger, accueillir chaque parcours.</p>
+        </div>
+        <div class="podcast-card">
+             <img src="images/accueil33.JPG" alt="respectcover">
+            <p><strong>Respect :</strong> protéger les histoires confiées.</p>
+        </div>
+        <div class="podcast-card">
+            <img src="images/sororite.jpg" alt="sororitecover">
+            <p><strong>Sororité :</strong> créer des liens entre femmes, visibles ou invisibles.</p>
+        </div>
+              <!--  <div class="podcast-card">
+            <img src="images/home4.jpg" alt="podcastcover">
+            <a href="podcasts.html">Épisode 9: Cheveux afros, braids, perruques : identité ou camouflage ?</a>
+            <button>Culture</button>
+        </div>
+    </div>
+   <a href="podcasts.html"><button class="btn">Voir tous les épisodes</button></a> -->
+</section>
+<section class="apro-vision"> <h2>Notre vision</h2> <p>Nous croyons que chaque récit, même le plus simple, 
+  même le plus discret, peut éclairer une autre vie. Nous voulons construire un média humain, doux, profondément ancré dans la réalité des 
+  femmes d’aujourd’hui. Un média qui inspire, soutient et libère la parole. </p> </section> 
+<section class="apro-datas">
+  <h3>Violences conjugales: chiffres clés</h3>
+  <div class="data-cards">
+    <!-- Visualisation 1 -->
+    <div class="data-card">
+      <img src="images/visu1.jpg" alt="Visualisation 1">
+      <p>Le silence domine. Presque la moitié des victimes (47 %) choisissent de ne le dire à personne après la violence. Seul un pourcentage minime (3,2 %) fait un signalement à la police ou à la gendarmerie.</p>
+      <a href="https://mobile.interieur.gouv.fr/Interstats/L-enquete-GENESE" target="_blank">Lien vers la source</a>
+    </div>
+
+    <!-- Visualisation 2 -->
+    <div class="data-card">
+      <img src="images/visu2.jpg" alt="Visualisation 2">
+      <p>La forte hausse des signalements est majoritairement due aux victimes qui dénoncent des faits anciens (la courbe la plus haute). Cela prouve une libération de la parole et une augmentation de la confiance dans le système.</p>
+      <a href="https://mobile.interieur.gouv.fr/Interstats/Infractions-et-sentiment-d-insecurite/Violences-physiques-ou-sexuelles/Conjugales/Info-rapide-n-56-Les-violences-conjugales-enregistrees-par-les-services-de-securite-quasi-stabilisation-en-2024" target="_blank">Lien vers la source</a>
+    </div>
+
+    <!-- Visualisation 3 -->
+    <div class="data-card">
+      <img src="images/visu3.jpg" alt="Visualisation 3">
+      <p>Cette visualisation est essentielle pour démystifier le mythe de l'agresseur « inconnu dans une ruelle sombre ». Dans la grande majorité des cas, l'agresseur est connu de la victime : il s'agit le plus souvent du conjoint, de l'ex-conjoint, ou d'une connaissance (91% des cas).</p>
+      <a href="https://arretonslesviolences.gouv.fr/sites/default/files/2022-11/Lettre%20n%C2%B018%20-%20Les%20violences%20au%20sein%20du%20couple%20et%20les%20violences%20sexuelles%20en%202021.pdf" target="_blank">Lien vers la source</a>
+    </div>
+  </div>
+  <!-- Lightbox modal -->
+<div id="lightbox" class="lightbox">
+  <span class="close">&times;</span>
+  <img class="lightbox-content" id="lightbox-img">
+</div>
+
+</section>
+<div id="apropos-section">
+  <div id="page-header" class="p-3 text-center text-white font-bold">
+    <h2>Expériences difficiles auxquelles des femmes sont confrontées</h2>
+  </div>
+   <div class="square-wrapper">
+  <div id="chart-container"></div>
+  </div>
+</div>
+
+<section class="apro-cta"> <h3>Envie de nous écrire ?</h3> <p>Vous souhaitez partager votre histoire, proposer un sujet ou simplement nous laisser un message ?
+
+</p> <a href="partager.html" class="cta-btn">Nous contacter</a> </section>
+
+
+        </main>
+   <footer class="footer">
+  <div class="footer-top">
+
+<div class="footer-brand">
+  <img src="images/wave.png" alt="logo" class="footer-logo">
+
+  <div class="footer-brand-text">
+    <h2>Écho des Oubliées</h2>
+    <p>Amplifier les voix des femmes, une histoire à la fois.</p>
+  </div>
+</div>
+
+    <div class="footer-links">
+      <h3>Liens rapides</h3>
+      <ul>
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="apropos.html">À Propos</a></li>
+        <li><a href="episodes.html">Épisodes</a></li>
+        <li><a href="partager.html">Contact</a></li>
+       
+      </ul>
+    </div>
+
+    <div class="footer-info">
+      <h3>Informations</h3>
+      <ul>
+        <li><a href="mention.html">Mentions légales</a></li>
+        <li><a href="privacy.html">Politique de confidentialité</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-social">
+  <h3>Suivez-nous</h3>
+  <div class="social-icons">
+    <a href="https://www.instagram.com/"><img src="images/instagram.png" alt="Instagram"></a>
+    <a href="https://www.youtube.com/"><img src="images/youtube.png" alt="YouTube"></a>
+    <a href="https://open.spotify.com/"><img src="images/spotify.png" alt="Spotify"></a>
+  </div>
+</div>
+  </div>
+
+  <div class="footer-bottom">
+    © 2025 Écho des Oubliées — Tous droits réservés.
+  </div>
+</footer>
+    <script src="script.js"></script>
+</body>
+</html>

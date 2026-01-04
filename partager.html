@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Echo des Oubliées</title>
+    <link rel="stylesheet" href="global.css">
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+    <nav class="navbar">
+        <a href="index.html"><img src="images/logo.png" alt="logo"></a>
+
+          <!-- HAMBURGER BUTTON -->
+    <button class="menu-toggle">☰</button>
+        <ul class="nav-links">
+            <li><a href="index.html">Accueil</a></li>
+            <li><a href="apropos.html">À propos</a></li>
+            <li><a href="episodes.html">Épisodes</a></li>
+            <li><a href="partager.html">Contact</a></li>
+        </ul> 
+    </nav>
+    <main>
+        <section class="contact-section">
+        <h1>Partager Mon Histoire</h1>
+        <p class="contact-intro">
+        Votre voix compte. Votre histoire pourrait inspirer d'autres femmes confrontées à des défis similaires.
+      Nous serions honorés de vous entendre et potentiellement de partager votre parcours dans notre  podcast.
+        </p>
+
+  <form class="contact-form">
+
+    <label for="name">Votre Nom</label>
+    <input type="text" id="name" placeholder="Comment devons-nous vous appeler ?">
+    <p id="name-error" style="color:#d00; display:none; font-size:14px; margin-top:-10px;">
+    ⚠️ Veuillez entrer votre nom.
+    </p>
+
+  <label for="country">Pays</label>
+  
+  <div class="select-wrapper">
+  <select id="country">
+    <option value="">Choisissez votre pays</option>
+    <option value="France">France</option>
+    <option value="Belgique">Belgique</option>
+    <option value="Suisse">Suisse</option>
+    <option value="Canada">Canada</option>
+    <option value="Maroc">Maroc</option>
+    <option value="Algérie">Algérie</option>
+    <option value="Tunisie">Tunisie</option>
+    <option value="Côte d’Ivoire">Côte d’Ivoire</option>
+    <option value="Sénégal">Sénégal</option>
+    <option value="Madagascar">Madagascar</option>
+    <option value="Burkina Faso">Burkina Faso</option>
+    <option value="Niger">Niger</option>
+    <option value="Mali">Mali</option>
+    <option value="Guinée">Guinée</option>
+    <option value="Togo">Togo</option>
+    <option value="Bénin">Bénin</option>
+    <option value="Cameroun">Cameroun</option>
+    <option value="Gabon">Gabon</option>
+    <option value="Réunion">Réunion</option>
+    <option value="Autre">Autre</option>
+  </select>
+  <span class="select-icon">▼</span>
+</div>
+<p id="country-error" style="color:#d00; display:none; font-size:14px; margin-top:-10px;">
+⚠️ Veuillez choisir votre pays.
+</p>
+
+    <label for="email">Adresse Email</label>
+    <input type="email" id="email" placeholder="votre.email@exemple.com">
+    <p id="email-error" style="color:#d00; display:none; font-size:14px; margin-top:-10px;">
+    ⚠️ Veuillez entrer une adresse email valide.
+    </p>
+
+    <label for="story">Votre Histoire</label>
+    <textarea id="story" rows="7" placeholder="Racontez-nous votre histoire ..."></textarea>
+    <p id="story-error" style="color:#d00; display:none; font-size:14px; margin-top:-10px;">
+  ⚠️ Veuillez raconter votre histoire.
+   </p>
+  
+    <div class="privacy-policy">
+  <input type="checkbox" id="privacy">
+   <label for="privacy">
+    J’accepte la <a href="privacy.html" target="_blank">Politique de confidentialité</a> et le traitement de mes données personnelles.
+   </label>  
+   </div>
+   <p id="privacy-error" style="color:#d00; display:none; font-size:14px; margin-top:-10px;">
+    ⚠️ Veuillez accepter la politique de confidentialité.  
+  </p>
+  <div class="g-recaptcha" data-sitekey="6LcCxxwsAAAAAJhoU6ayYmTh7IzTYN8ezlczMsYl"></div>
+<div id="captcha-error" style="display:none; color:#d00; font-size:14px; margin-top:-10px; text-align:left;">
+  ⚠️ Veuillez confirmer que vous n'êtes pas un robot.
+</div>
+    <button type="submit" class="btn-submit">Envoyer Mon Histoire</button>
+  </form>
+<p id="success-message">
+  Merci d’avoir partagé votre histoire.
+</p>
+
+
+
+  <p class="confidentialite">
+    Nous traitons chaque histoire avec soin et confidentialité.  
+    Nous vous contacterons pour discuter des prochaines étapes.
+  </p>
+</section>
+       </main>
+   <footer class="footer">
+  <div class="footer-top">
+
+<div class="footer-brand">
+  <img src="images/wave.png" alt="logo" class="footer-logo">
+
+  <div class="footer-brand-text">
+    <h2>Écho des Oubliées</h2>
+    <p>Amplifier les voix des femmes, une histoire à la fois.</p>
+  </div>
+</div>
+
+    <div class="footer-links">
+      <h3>Liens rapides</h3>
+      <ul>
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="apropos.html">À Propos</a></li>
+        <li><a href="episodes.html">Épisodes</a></li>
+        <li><a href="partager.html">Contact</a></li>
+        
+      </ul>
+    </div>
+
+    <div class="footer-info">
+      <h3>Informations</h3>
+      <ul>
+        <li><a href="mention.html">Mentions légales</a></li>
+        <li><a href="privacy.html">Politique de confidentialité</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-social">
+  <h3>Suivez-nous</h3>
+  <div class="social-icons">
+    <a href="https://www.instagram.com/"><img src="images/instagram.png" alt="Instagram"></a>
+    <a href="https://www.youtube.com/"><img src="images/youtube.png" alt="YouTube"></a>
+    <a href="https://open.spotify.com/"><img src="images/spotify.png" alt="Spotify"></a>
+  </div>
+</div>
+  </div>
+
+  <div class="footer-bottom">
+    © 2025 Écho des Oubliées — Tous droits réservés.
+  </div>
+</footer>
+    <script src="script.js"></script>
+   <script src="https://www.google.com/recaptcha/api.js?hl=fr" async defer></script>
+
+</body>
+</html>
+
+

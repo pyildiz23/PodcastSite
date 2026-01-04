@@ -1,0 +1,113 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Echo des Oubliées</title>
+    <link rel="stylesheet" href="style.css">
+
+</head>
+<body>
+    <nav class="navbar">
+        <a href="index.html"><img src="images/logo.png" alt="logo"></a>
+          <!-- HAMBURGER BUTTON -->
+    <button class="menu-toggle">☰</button>
+        <ul class="nav-links">
+            <li><a href="index.html">Accueil</a></li>
+            <li><a href="apropos.html">À propos</a></li>
+            <li><a href="episodes.html">Épisodes</a></li>
+            <li><a href="partager.html">Partager Histoire</a></li>
+
+            <li><a href="contact.html">Contact</a></li>
+        </ul>
+        
+    </nav>
+    <main>
+        <section class="contact-section" id="contactt">
+  <h1>Contactez - Nous</h1>
+  <p class="contact-intro">
+  Pour toute question, collaboration ou information, n’hésitez pas à nous écrire.
+  </p>
+
+  <form class="contact-form">
+
+  <label for="name">Nom *</label>
+  <input id="name" name="name" type="text" required placeholder="Votre nom">
+
+  <label for="email">Email *</label>
+  <input id="email" name="email" type="email" required placeholder="contact@exemple.com">
+
+<label for="objet">Objet *</label>
+<select id="objet" name="objet" required>
+  <option value="" disabled selected>Choisissez une option</option>
+  <option value="question">J’ai une question</option>
+  <option value="collaboration">Collaboration / Projet</option>
+  <option value="partenariat">Demande de partenariat</option>
+  <option value="sujet">Proposer un sujet d’épisode</option>
+  <option value="feedback">Donner un feedback</option>
+  <option value="autre">Autre</option>
+</select>
+
+
+  <label for="message">Message *</label>
+  <textarea id="message" name="message" rows="6" required placeholder="Écrivez votre message..."></textarea>
+    <div class="privacy-policy">
+  <input type="checkbox" id="privacy" required>
+   <label for="privacy">
+    J’accepte la <a href="privacy.html" target="_blank">Politique de confidentialité</a> et le traitement de mes données personnelles.
+   </label>  
+   </div>
+    <button type="submit" class="btn-submit">Envoyer</button>
+  </form>
+</section>
+       </main>
+   <footer class="footer">
+  <div class="footer-top">
+
+<div class="footer-brand">
+  <img src="images/wave.png" alt="logo" class="footer-logo">
+
+  <div class="footer-brand-text">
+    <h2>Écho des Oubliées</h2>
+    <p>Amplifier les voix des femmes, une histoire à la fois.</p>
+  </div>
+</div>
+
+    <div class="footer-links">
+      <h3>Liens rapides</h3>
+      <ul>
+        <li><a href="index.html">Accueil</a></li>
+        <li><a href="apropos.html">À Propos</a></li>
+        <li><a href="episodes.html">Épisodes</a></li>
+            <li><a href="partager.html">Partager Histoire</a></li>
+
+        <li><a href="contact.html">Contact</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-info">
+      <h3>Informations</h3>
+      <ul>
+        <li><a href="mention.html">Mentions légales</a></li>
+        <li><a href="privacy.html">Politique de confidentialité</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-social">
+  <h3>Suivez-nous</h3>
+  <div class="social-icons">
+    <a href="https://www.instagram.com/"><img src="images/instagram.png" alt="Instagram"></a>
+    <a href="https://www.youtube.com/"><img src="images/youtube.png" alt="YouTube"></a>
+    <a href="https://open.spotify.com/"><img src="images/spotify.png" alt="Spotify"></a>
+  </div>
+</div>
+  </div>
+
+  <div class="footer-bottom">
+    © 2025 Écho des Oubliées — Tous droits réservés.
+  </div>
+</footer>
+    <script src="script.js"></script>
+</body>
+</html>

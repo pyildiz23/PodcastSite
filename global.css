@@ -1,0 +1,45 @@
+/* ===== GLOBAL TYPOGRAPHY ===== */
+
+html {
+  font-size: 16px; /* base size */
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  color: #2c2c2c;
+  line-height: 1.6;
+}
+
+/* HEADINGS SCALE */
+h1 {
+  font-size: 2.3rem;
+  font-weight: 800;
+}
+
+h2 {
+  font-size: 1.9rem;
+  font-weight: 700;
+}
+
+h3 {
+  font-size: 1.6rem;
+  font-weight: 700;
+}
+
+h4 {
+  font-size: 1.3rem;
+  font-weight: 600;
+}
+
+/* Paragraphs */
+p {
+  font-size: 1.1rem;
+}
+
+/* MOBILE ADJUSTMENTS */
+@media (max-width: 600px) {
+  h1 { font-size: 1.9rem; }
+  h2 { font-size: 1.6rem; }
+  h3 { font-size: 1.4rem; }
+  p  { font-size: 1rem; }
+}

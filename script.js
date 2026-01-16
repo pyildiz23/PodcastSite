@@ -1,336 +1,1229 @@
-document.addEventListener("DOMContentLoaded", function() {
+document.addEventListener("DOMContentLoaded", function () {
 
-  /* ===== FORM VALIDATION + SUCCESS MESSAGE + reCAPTCHA ===== */
+  /* ================= FORM VALIDATION ================= */
   const form = document.querySelector('.contact-form');
   const successMessage = document.getElementById('success-message');
 
-  if(form){
-    form.addEventListener('submit', function(e){
+  if (form) {
+    form.addEventListener('submit', function (e) {
       e.preventDefault();
 
-      const name = document.getElementById('name').value.trim();
-      const country = document.getElementById('country').value.trim();
-      const email = document.getElementById('email').value.trim();
-      const story = document.getElementById('story').value.trim();
-      const privacy = document.getElementById('privacy').checked;
+      const name = document.getElementById('name')?.value.trim();
+      const email = document.getElementById('email')?.value.trim();
+      const subject = document.getElementById('subject')?.value;
+      const message = document.getElementById('message')?.value.trim();
+      const privacy = document.getElementById('privacy')?.checked;
 
-      // Error msgs
       const nameError = document.getElementById('name-error');
-      const countryError = document.getElementById('country-error');
       const emailError = document.getElementById('email-error');
-      const storyError = document.getElementById('story-error');
+      const subjectError = document.getElementById('subject-error');
+      const messageError = document.getElementById('message-error');
       const privacyError = document.getElementById('privacy-error');
-      const captchaError = document.getElementById('captcha-error');
 
       let valid = true;
 
-      if(!name){ nameError && (nameError.style.display='block'); valid=false; } else { nameError && (nameError.style.display='none'); }
-      if(!country){ countryError && (countryError.style.display='block'); valid=false; } else { countryError && (countryError.style.display='none'); }
-      if(!email){ emailError && (emailError.style.display='block'); valid=false; } else { emailError && (emailError.style.display='none'); }
-      if(!story){ storyError && (storyError.style.display='block'); valid=false; } else { storyError && (storyError.style.display='none'); }
-      if(!privacy){ privacyError && (privacyError.style.display='block'); valid=false; } else { privacyError && (privacyError.style.display='none'); }
-
-      // reCAPTCHA check
-      if(typeof grecaptcha !== "undefined"){
-        const captchaResponse = grecaptcha.getResponse();
-        if(!captchaResponse || captchaResponse.length===0){
-          captchaError && (captchaError.style.display='block');
-          valid = false;
-        } else {
-          captchaError && (captchaError.style.display='none');
-        }
+      // Validation: Nom
+      if (!name) {
+        nameError && (nameError.style.display = 'block');
+        valid = false;
+      } else {
+        nameError && (nameError.style.display = 'none');
       }
 
-      if(valid){
-        successMessage && (successMessage.style.display='block', successMessage.style.opacity=1);
-
-        // fade-out
-        setTimeout(()=>{
-          successMessage && (successMessage.style.opacity=0);
-          setTimeout(()=>{ successMessage && (successMessage.style.display='none'); }, 500);
-        }, 3000);
-
-        // reset form and error msgs
-        form.reset();
-        [nameError, countryError, emailError, storyError, privacyError, captchaError].forEach(err=>{ if(err) err.style.display='none'; });
-
-        // reCAPTCHA reset
-        if(typeof grecaptcha !== "undefined"){ grecaptcha.reset(); }
-
+      // Validation: Email
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!email || !emailRegex.test(email)) {
+        emailError && (emailError.style.display = 'block');
+        valid = false;
       } else {
-        successMessage && (successMessage.style.opacity=0, successMessage.style.display='none');
+        emailError && (emailError.style.display = 'none');
+      }
+
+      // Validation: Sujet
+      if (!subject) {
+        subjectError && (subjectError.style.display = 'block');
+        valid = false;
+      } else {
+        subjectError && (subjectError.style.display = 'none');
+      }
+
+      // Validation: Message
+      if (!message) {
+        messageError && (messageError.style.display = 'block');
+        valid = false;
+      } else {
+        messageError && (messageError.style.display = 'none');
+      }
+
+      // Validation: Privacy
+      if (!privacy) {
+        privacyError && (privacyError.style.display = 'block');
+        valid = false;
+      } else {
+        privacyError && (privacyError.style.display = 'none');
+      }
+
+      // Si tout est valide
+      if (valid) {
+        // Afficher le message de succès
+        if (successMessage) {
+          successMessage.style.display = 'block';
+          successMessage.style.opacity = '1';
+          
+          setTimeout(() => {
+            successMessage.style.opacity = '0';
+            setTimeout(() => {
+              successMessage.style.display = 'none';
+            }, 500);
+          }, 4000);
+        }
+
+        // Réinitialiser le formulaire
+        form.reset();
+        
+        // Cacher toutes les erreurs
+        [nameError, emailError, subjectError, messageError, privacyError].forEach(err => {
+          if (err) err.style.display = 'none';
+        });
       }
     });
   }
 
-  /* ===== HAMBURGER MENU ===== */
+  /* ================= HAMBURGER MENU ================= */
   const toggleBtn = document.querySelector(".menu-toggle");
   const navLinks = document.querySelector(".nav-links");
-  if(toggleBtn && navLinks){
-    toggleBtn.addEventListener("click", ()=> navLinks.classList.toggle("active"));
-    window.addEventListener("scroll", ()=>{ if(navLinks.classList.contains("active")) navLinks.classList.remove("active"); });
+  if (toggleBtn && navLinks) {
+    toggleBtn.addEventListener("click", () => navLinks.classList.toggle("active"));
+    window.addEventListener("scroll", () => navLinks.classList.remove("active"));
   }
 
-  /* ===== NAV ACTIVE LINK ===== */
+  /* ================= ACTIVE NAV LINK ================= */
   const navvLinks = document.querySelectorAll('.nav-links a');
   const currentPage = window.location.pathname.split("/").pop();
-  navvLinks.forEach(link => { if(link.getAttribute('href') === currentPage) link.classList.add('active'); });
-
-  /* ===== AUDIO PLAYER ===== */
-  const player = document.getElementById('player');
-  if(player){
-    let currentBtn = null;
-    document.querySelectorAll('.play-icon').forEach(btn=>{
-      btn.addEventListener('click', ()=>{
-        const audioSrc = btn.dataset.audio;
-        if(currentBtn===btn && !player.paused){ player.pause(); btn.textContent='▶'; return; }
-        if(currentBtn && currentBtn!==btn) currentBtn.textContent='▶';
-        player.src=audioSrc; player.play();
-        btn.textContent='❚❚'; currentBtn=btn;
-      });
-    });
-    player.addEventListener('pause', ()=>{ if(currentBtn) currentBtn.textContent='▶'; });
-  }
-
-  /* ===== MODAL FOR IMAGES ===== */
-  const lightbox = document.getElementById('lightbox');
-  const lightboxImg = document.getElementById('lightbox-img');
-  const closeBtn = document.querySelector('.close');
-
-  document.querySelectorAll('.data-card img').forEach(img=>{
-    img.addEventListener('click', ()=>{
-      if(lightbox && lightboxImg){
-        lightbox.style.display='flex';
-        lightboxImg.src = img.src;
-      }
-    });
+  navvLinks.forEach(link => {
+    if (link.getAttribute('href') === currentPage) link.classList.add('active');
   });
 
-  closeBtn && closeBtn.addEventListener('click', ()=>{ if(lightbox) lightbox.style.display='none'; });
-  lightbox && lightbox.addEventListener('click',(e)=>{ if(e.target===lightbox) lightbox.style.display='none'; });
+  /* ================= ACCUEIL - DERNIERS ÉPISODES ================= */
+  const recentPodcastsContainer = document.querySelector('.podcast-cards');
   
+  if (recentPodcastsContainer) {
+    loadRecentEpisodes();
+  }
 
-  /* ===== D3 DATA GRAPH ===== */
-  const container = document.getElementById('chart-container');
-  if(container){
+  function loadRecentEpisodes() {
+    const RSS_URL = "https://anchor.fm/s/10dbe85d0/podcast/rss";
+    const CACHE_KEY = 'recent_episodes_cache';
+    const CACHE_DURATION = 30 * 60 * 1000; // 30 minutes
 
-     if(container){
+    // Skeleton loader pour la page d'accueil
+    recentPodcastsContainer.innerHTML = Array(3).fill(0).map(() => `
+      <div class="podcast-card" style="opacity: 0.6;">
+        <div style="background: #e0e0e0; height: 200px; border-radius: 8px;"></div>
+        <div style="height: 20px; background: #e0e0e0; border-radius: 4px; margin: 10px 0;"></div>
+        <div style="height: 30px; background: #e0e0e0; border-radius: 20px; width: 100px;"></div>
+      </div>
+    `).join('');
 
-    // --- Container size ---
-    function getContainerSize() {
-      const rect = container.getBoundingClientRect();
-      return { width: Math.max(300, rect.width), height: Math.max(300, rect.height) };
+    // Vérifier le cache
+    const cachedData = getCachedRecentEpisodes();
+    if (cachedData) {
+      renderRecentEpisodes(cachedData);
+      return;
     }
-    let { width, height } = getContainerSize();
 
-    // --- Data ---
-    const discriminationData = [
-           { name: "I. VIOLENCES ET AGRESSIONS (PHYSIQUES ET SEXUELLES)", color: "#FFD700", subcategories: [
-          { name: "Violences conjugales", details: ["Violence physique","Violence sexuelle","Violence psychologique/verbale","Violence économique","Comportement contrôlant"] },
-          { name: "Viol et agression sexuelle", details: ["Viol","Tentative de viol","Agression sexuelle (sans pénétration)","Harcèlement sexuel","Attentat à la pudeur"] },
-          { name: "Fémicide", details: ["Fémicide direct","Fémicide indirect","Meurtres d'enfants dans le cadre d'un fémicide","Tentatives de meurtre au sein du couple"] },
-          { name: "Violences dans l'espace public et outrage sexiste", details: ["Outrages sexistes","Sifflements, regards insistants, commentaires","Contact physique non consenti","Poursuite et filature","Menaces et intimidation"] }
-        ]
-      },
-      { name: "II. CYBERVIOLENCE ET HARCÈLEMENT EN LIGNE", color: "#FF4500", subcategories: [
-          { name: "Cyberviolence", details: ["Insultes en ligne","Harcèlement sexuel en ligne","Harcèlement répété et cyberharcèlement","Menaces en ligne","Diffusion d'images intimes","Sextorsion"] },
-          { name: "Cyberharcèlement scolaire", details: ["Au collège","Au lycée","Visio-lynchage","Usurpation d'identité en milieu scolaire"] },
-          { name: "\"Revenge porn\" et diffusion d'images", details: ["Diffusion non consentie de photos intimes","Vidéos sans consentement","Deepfakes","Chantage"] }
-        ]
-      },
-      { name: "III. DISCRIMINATION AU TRAVAIL ET ÉCONOMIQUE", color: "#8A2BE2", subcategories: [
-          { name: "Discrimination à l'embauche", details: ["Refus d'emploi en raison du sexe","Questions sur la fertilité","Discrimination liée à la grossesse"] },
-          { name: "Inégalité salariale", details: ["Discrimination salariale directe","Inégalité des primes","Accès inégal aux promotions"] },
-          { name: "Pénalité liée à la maternité", details: ["Refus de réintégration après congé maternité","Baisse de salaire après une naissance"] },
-          { name: "Plafond de verre", details: ["Absence de femmes dans les postes de direction","Sous-représentation dans les STEM"] },
-          { name: "Travail à temps partiel", details: ["Contrainte au temps partiel"] },
-          { name: "Précarité", details: ["Ségrégation dans les secteurs peu rémunérés","Emploi instable"] }
-        ]
-      },
-      { name: "IV. DISCRIMINATION RACIALE ET LIÉE À L'ORIGINE", color: "#FF0000", subcategories: [
-          { name: "Islamophobie et discrimination des femmes musulmanes", details: ["Discrimination à l'embauche","Isolement et marginalisation sociale","Sexualisation et exotisation"] },
-          { name: "Racisme et discrimination ethnique", details: ["Discrimination des femmes afro-françaises","Profilage racial"] },
-          { name: "Discrimination des femmes migrantes", details: ["Refus d'emploi","Refus de logement","Difficultés d'accès à la protection"] }
-        ]
-      },
-      { name: "V. SEXUALITÉ ET DROITS REPRODUCTIFS", color: "#00CED1", subcategories: [
-          { name: "Mariage forcé", details: ["Mariage sans consentement","Mariage d'enfants"] },
-          { name: "Mutilations génitales féminines", details: ["Excision partielle","Infibulation"] },
-          { name: "Stérilisation forcée", details: ["Stérilisation sans consentement"] },
-          { name: "Violences reproductives", details: ["Absence d'accès à la contraception","Sabotage de la contraception"] }
-        ]
-      },
-      { name: "VI. DISCRIMINATION LIÉE À L'ÂGE (ÂGISME)", color: "#32CD32", subcategories: [
-          { name: "Jeunes femmes (15-29 ans)", details: ["Sous-estimation de l'opinion","Commentaires sexuels","Discrimination à l'embauche"] },
-          { name: "Femmes âgées (65+)", details: ["Invisibilisation sociale","Négligence médicale"] }
-        ]
-      },
-      { name: "VII. DISCRIMINATION LIÉE À LA SANTÉ ET AU HANDICAP", color: "#808000", subcategories: [
-          { name: "Femmes handicapées", details: ["Refus d'emploi","Violences sexuelles","Refus d'aménagements"] },
-          { name: "Stigmatisation liée au VIH", details: ["Refus de soins","Stigmatisation sociale"] }
-        ]
-      },
-      { name: "VIII. SEXUALITÉ ET ORIENTATION", color: "#FF69B4", subcategories: [
-          { name: "Lesbophobie", details: ["Violences physiques","Violences verbales"] },
-          { name: "Transphobie", details: ["Violences physiques et psychologiques","Maltraitance médicale"] },
-          { name: "Discrimination des bisexuelles", details: ["Invisibilisation","Stéréotypes"] }
-        ]
-      },
-      { name: "IX. VIOLENCES MÉDICALES ET GYNÉCOLOGIQUES", color: "#00BFFF", subcategories: [
-          { name: "Violences obstétricales", details: ["Examens sans consentement","Refus d'analgésie"] },
-          { name: "Violences gynécologiques", details: ["Examens brutaux","Consentement non éclairé"] }
-        ]
-      },
-      { name: "X. EXPLOITATION SEXUELLE", color: "#9400D3", subcategories: [
-          { name: "Prostitution et exploitation", details: ["Prostitution contrainte","Prostitution d'enfants"] },
-          { name: "Traite des êtres humains", details: ["Traite internationale","Esclavage sexuel"] },
-          { name: "Grooming", details: ["Grooming en ligne","Grooming en personne"] }
-        ]
-      },
-      { name: "XI. VIOLENCES CULTURELLES ET SÉMIOTIQUES", color: "#F4A460", subcategories: [
-          { name: "Sexualisation et objectivation", details: ["Sexualisation médiatique","Publicité sexualisante"] },
-          { name: "Stéréotypes et représentation", details: ["Madone / Prostituée","Réduction de la femme à son corps"] }
-        ]
-      },
-      { name: "XII. CONTRÔLE POLITIQUE ET SOCIAL", color: "#20B2AA", subcategories: [
-          { name: "Contrôle reproductif", details: ["Restriction d'accès à l'avortement","Restriction d'accès à la contraception"] },
-          { name: "Violences législatives", details: ["Lois inégales sur le divorce","Sanctions faibles contre violences"] }
-        ]
-      }
-    ];
+    // Charger depuis RSS
+    fetch(`https://api.allorigins.win/raw?url=${encodeURIComponent(RSS_URL)}`)
+      .then(res => res.text())
+      .then(xmlContent => {
+        const parser = new DOMParser();
+        const xml = parser.parseFromString(xmlContent, "text/xml");
+        
+        if (xml.querySelector("parsererror")) {
+          throw new Error("Erreur XML");
+        }
 
-    // --- Build nodes & links ---
-    const nodes = [];
-    const links = [];
-    let idCounter = 0;
-    const rootId = idCounter++;
-    nodes.push({ id: rootId, name:'', level:0, size:28, fx:null, fy:null, color:'#ffffff' });
+        const items = xml.querySelectorAll("item");
+        const recentEpisodes = [];
 
-    discriminationData.forEach(cluster => {
-      const color = cluster.color;
-      const displayCategoryName = cluster.name.replace(/^[IVX]+\.\s*/,'').trim();
-      const categoryId = idCounter++;
-      nodes.push({ id:categoryId, name:displayCategoryName, nameWords: displayCategoryName.split(/\s+/), level:1, size:56, color, group: cluster.name });
-      links.push({ source: rootId, target: categoryId, distance:60, strength:0.08 });
-      cluster.subcategories.forEach(sub => {
-        const subId = idCounter++;
-        nodes.push({ id:subId, name:sub.name, level:2, size:14, color, group: cluster.name });
-        const dynDist = Math.min(120, 40 + sub.name.length*2.5);
-        links.push({ source: categoryId, target: subId, distance: dynDist, strength:0.9 });
+        // Prendre les 3 premiers
+        for (let i = 0; i < Math.min(3, items.length); i++) {
+          const item = items[i];
+          const enclosure = item.querySelector("enclosure");
+          const audio = enclosure?.getAttribute("url");
+          
+          if (!audio) continue;
+
+          const categoryTag = item.querySelector("category, itunes\\:category");
+          const durationTag = item.querySelector("itunes\\:duration, duration");
+          const pubDate = item.querySelector("pubDate");
+          
+          recentEpisodes.push({
+            title: item.querySelector("title")?.textContent || "Sans titre",
+            description: item.querySelector("description")?.textContent || "",
+            category: categoryTag?.textContent || "Podcast",
+            duration: durationTag?.textContent || null,
+            pubDate: pubDate?.textContent || "",
+            audio: audio,
+            image: `images/accueil${i + 1}.jpg`
+          });
+        }
+
+        // Mettre en cache
+        setCachedRecentEpisodes(recentEpisodes);
+        renderRecentEpisodes(recentEpisodes);
+      })
+      .catch(err => {
+        console.error("Erreur chargement épisodes récents:", err);
+        recentPodcastsContainer.innerHTML = `
+          <p style="grid-column: 1/-1; text-align: center; color: #666;">
+            Impossible de charger les épisodes récents.
+          </p>
+        `;
       });
+
+    function getCachedRecentEpisodes() {
+      try {
+        const cached = localStorage.getItem(CACHE_KEY);
+        if (!cached) return null;
+        
+        const data = JSON.parse(cached);
+        const age = Date.now() - data.timestamp;
+        
+        if (age < CACHE_DURATION) {
+          return data.episodes;
+        }
+        localStorage.removeItem(CACHE_KEY);
+        return null;
+      } catch (e) {
+        return null;
+      }
+    }
+
+    function setCachedRecentEpisodes(episodes) {
+      try {
+        localStorage.setItem(CACHE_KEY, JSON.stringify({
+          episodes: episodes,
+          timestamp: Date.now()
+        }));
+      } catch (e) {
+        console.warn("Cache non disponible");
+      }
+    }
+
+    function renderRecentEpisodes(episodes) {
+      if (episodes.length === 0) {
+        recentPodcastsContainer.innerHTML = `
+          <p style="grid-column: 1/-1; text-align: center; color: #666;">
+            Aucun épisode disponible pour le moment.
+          </p>
+        `;
+        return;
+      }
+
+      recentPodcastsContainer.innerHTML = episodes.map((ep) => {
+        const date = ep.pubDate ? new Date(ep.pubDate).toLocaleDateString("fr-FR", {
+          day: "numeric",
+          month: "long",
+          year: "numeric"
+        }) : '';
+        
+        const cleanDesc = (ep.description || '').replace(/<[^>]*>/g, '').substring(0, 100);
+        const descText = cleanDesc ? cleanDesc + '...' : '';
+        const duration = ep.duration ? formatDurationAccueil(ep.duration) : '';
+
+        return `
+          <div class="podcast-card">
+            <img src="${ep.image}" alt="Couverture podcast">
+            <a href="episodes.html?episode=${encodeURIComponent(ep.title)}" style="display: block; padding: 15px 10px 5px; text-decoration: none; color: #252524; font-weight: bold; font-size: 1rem;">
+              ${ep.title}
+            </a>
+            ${descText ? `<p style="padding: 0 15px; font-size: 0.9rem; color: #666; line-height: 1.5; margin-bottom: 10px;">
+              ${descText}
+            </p>` : ''}
+            <div style="padding: 0 15px; display: flex; gap: 80px; font-size: 0.85rem; color: #888; margin-bottom: 15px; flex-wrap: wrap; align-items: center;">
+              ${duration ? `<span style="display: inline-flex; align-items: center; gap: 6px; font-weight: 500;">⏱ ${duration}</span>` : ''}
+              ${date ? `<span style="display: inline-flex; align-items: center; gap: 6px; font-weight: 500;">📅 ${date}</span>` : ''}
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+    
+    function formatDurationAccueil(duration) {
+      if (!duration) return '';
+      
+      if (duration.includes(':')) {
+        const parts = duration.split(':');
+        const hours = parseInt(parts[0]);
+        const mins = parseInt(parts[1]);
+        
+        if (hours > 0) return `${hours}h ${mins}min`;
+        return `${mins} min`;
+      }
+      
+      const totalMins = Math.floor(parseInt(duration) / 60);
+      if (totalMins >= 60) {
+        const h = Math.floor(totalMins / 60);
+        const m = totalMins % 60;
+        return `${h}h ${m}min`;
+      }
+      return `${totalMins} min`;
+    }
+  }
+
+  /* ================= PODCAST RSS - ULTRA RAPIDE ================= */
+
+  const RSS_URL = "https://anchor.fm/s/10dbe85d0/podcast/rss";
+  const container = document.getElementById("episodes-container");
+  const loadMoreBtn = document.getElementById("load-more");
+  const searchInput = document.querySelector(".search-input");
+
+  // ========== GLOBAL STICKY PLAYER FUNCTIONS (pour toutes les pages) ==========
+  
+  function showStickyPlayer(title, audioUrl) {
+    let stickyPlayer = document.getElementById('sticky-player');
+    
+    if (!stickyPlayer) {
+      stickyPlayer = document.createElement('div');
+      stickyPlayer.id = 'sticky-player';
+      stickyPlayer.innerHTML = `
+        <div class="sticky-player-content">
+          <div class="sticky-progress-container">
+            <div class="sticky-progress-bar"></div>
+          </div>
+          <div class="sticky-main">
+            <div class="sticky-info">
+              <div class="sticky-artwork">🎙️</div>
+              <div class="sticky-text">
+                <p class="sticky-title"></p>
+                <p class="sticky-subtitle">Échos Perdus</p>
+              </div>
+            </div>
+            
+            <div class="sticky-controls-center">
+              <div class="sticky-buttons">
+                <button class="sticky-btn sticky-prev-btn" title="Précédent">⏮</button>
+                <button class="sticky-btn sticky-play-btn">▶</button>
+                <button class="sticky-btn sticky-next-btn" title="Suivant">⏭</button>
+              </div>
+              <div class="sticky-time-display">
+                <span class="sticky-current-time">0:00</span>
+                <span class="sticky-duration">0:00</span>
+              </div>
+            </div>
+            
+            <div class="sticky-controls-right">
+              <div class="sticky-volume-container">
+                <span class="sticky-volume-icon">🔊</span>
+                <div class="sticky-volume-slider">
+                  <div class="sticky-volume-bar"></div>
+                </div>
+              </div>
+              <button class="sticky-close-btn" title="Fermer">✕</button>
+            </div>
+          </div>
+        </div>
+      `;
+      document.body.appendChild(stickyPlayer);
+
+      const player = document.getElementById('player');
+      const playBtn = stickyPlayer.querySelector('.sticky-play-btn');
+      const closeBtn = stickyPlayer.querySelector('.sticky-close-btn');
+      const progressContainer = stickyPlayer.querySelector('.sticky-progress-container');
+      const progressBar = stickyPlayer.querySelector('.sticky-progress-bar');
+      const currentTimeEl = stickyPlayer.querySelector('.sticky-current-time');
+      const durationEl = stickyPlayer.querySelector('.sticky-duration');
+      const volumeSlider = stickyPlayer.querySelector('.sticky-volume-slider');
+      const volumeBar = stickyPlayer.querySelector('.sticky-volume-bar');
+      const volumeIcon = stickyPlayer.querySelector('.sticky-volume-icon');
+
+      // Play/Pause
+      playBtn.onclick = () => {
+        if (player.paused) {
+          player.play();
+        } else {
+          player.pause();
+        }
+      };
+
+      player.onplay = () => {
+        playBtn.textContent = '❚❚';
+        // Sauvegarder l'état "playing"
+        try {
+          const saved = localStorage.getItem('currentPodcast');
+          if (saved) {
+            const data = JSON.parse(saved);
+            data.isPlaying = true;
+            localStorage.setItem('currentPodcast', JSON.stringify(data));
+          }
+        } catch (e) {}
+      };
+
+      player.onpause = () => {
+        playBtn.textContent = '▶';
+        // Sauvegarder l'état "paused"
+        try {
+          const saved = localStorage.getItem('currentPodcast');
+          if (saved) {
+            const data = JSON.parse(saved);
+            data.isPlaying = false;
+            localStorage.setItem('currentPodcast', JSON.stringify(data));
+          }
+        } catch (e) {}
+      };
+
+      // Progress bar
+      player.ontimeupdate = () => {
+        if (player.duration) {
+          const progress = (player.currentTime / player.duration) * 100;
+          progressBar.style.width = progress + '%';
+          currentTimeEl.textContent = formatTime(player.currentTime);
+        }
+      };
+
+      player.onloadedmetadata = () => {
+        durationEl.textContent = formatTime(player.duration);
+      };
+
+      // Click progress bar to seek
+      progressContainer.onclick = (e) => {
+        const rect = progressContainer.getBoundingClientRect();
+        const percent = (e.clientX - rect.left) / rect.width;
+        player.currentTime = percent * player.duration;
+      };
+
+      // Volume control
+      volumeSlider.onclick = (e) => {
+        const rect = volumeSlider.getBoundingClientRect();
+        const percent = (e.clientX - rect.left) / rect.width;
+        player.volume = Math.max(0, Math.min(1, percent));
+        volumeBar.style.width = (percent * 100) + '%';
+        updateVolumeIcon(percent);
+      };
+
+      volumeIcon.onclick = () => {
+        if (player.volume > 0) {
+          player.dataset.prevVolume = player.volume;
+          player.volume = 0;
+          volumeBar.style.width = '0%';
+          volumeIcon.textContent = '🔇';
+        } else {
+          player.volume = player.dataset.prevVolume || 1;
+          volumeBar.style.width = (player.volume * 100) + '%';
+          updateVolumeIcon(player.volume);
+        }
+      };
+
+      function updateVolumeIcon(volume) {
+        if (volume === 0) volumeIcon.textContent = '🔇';
+        else if (volume < 0.5) volumeIcon.textContent = '🔉';
+        else volumeIcon.textContent = '🔊';
+      }
+
+      // Close button
+      closeBtn.onclick = () => {
+        player.pause();
+        hideStickyPlayer();
+        try {
+          localStorage.removeItem('currentPodcast');
+        } catch (e) {}
+      };
+
+      // Prev/Next buttons (placeholder)
+      stickyPlayer.querySelector('.sticky-prev-btn').onclick = () => {
+        console.log('Previous episode (not implemented)');
+      };
+      
+      stickyPlayer.querySelector('.sticky-next-btn').onclick = () => {
+        console.log('Next episode (not implemented)');
+      };
+    }
+
+    stickyPlayer.querySelector('.sticky-title').textContent = title;
+    stickyPlayer.classList.add('show');
+    
+    // Sauvegarder l'état initial
+    try {
+      const player = document.getElementById('player');
+      localStorage.setItem('currentPodcast', JSON.stringify({
+        title: title,
+        audio: audioUrl,
+        isPlaying: !player.paused,
+        currentTime: player.currentTime || 0
+      }));
+    } catch (e) {}
+  }
+
+  function hideStickyPlayer() {
+    const stickyPlayer = document.getElementById('sticky-player');
+    if (stickyPlayer) {
+      stickyPlayer.classList.remove('show');
+    }
+    try {
+      localStorage.removeItem('currentPodcast');
+    } catch (e) {}
+  }
+
+  function formatTime(seconds) {
+    if (isNaN(seconds)) return '0:00';
+    const mins = Math.floor(seconds / 60);
+    const secs = Math.floor(seconds % 60);
+    return `${mins}:${secs.toString().padStart(2, '0')}`;
+  }
+
+  // Restaurer le podcast en cours si on change de page
+  function restorePlayer() {
+    try {
+      const saved = localStorage.getItem('currentPodcast');
+      if (!saved) return;
+      
+      const data = JSON.parse(saved);
+      const player = document.getElementById('player');
+      
+      if (!player || !data.audio) return;
+
+      console.log('📻 Restauration:', data.title, 'à', data.currentTime + 's');
+
+      // Définir la source et le temps
+      player.src = data.audio;
+      
+      // Attendre que le metadata soit chargé
+      player.addEventListener('loadedmetadata', function onLoaded() {
+        player.currentTime = data.currentTime || 0;
+        player.removeEventListener('loadedmetadata', onLoaded);
+        
+        // Reprendre la lecture si c'était en train de jouer
+        if (data.isPlaying) {
+          player.play().catch(() => {
+            console.log('⚠️ Lecture automatique bloquée');
+          });
+        }
+      });
+
+      // Restaurer le player visuel
+      showStickyPlayer(data.title, data.audio);
+
+    } catch (e) {
+      console.error('❌ Erreur restoration:', e);
+    }
+  }
+
+  // Sauvegarder l'état toutes les secondes
+  function startSyncInterval() {
+    const player = document.getElementById('player');
+    if (!player) return;
+
+    setInterval(() => {
+      try {
+        const saved = localStorage.getItem('currentPodcast');
+        if (saved && !player.paused) {
+          const data = JSON.parse(saved);
+          data.currentTime = player.currentTime;
+          data.isPlaying = !player.paused;
+          localStorage.setItem('currentPodcast', JSON.stringify(data));
+        }
+      } catch (e) {}
+    }, 1000);
+  }
+
+  // Restaurer au chargement de TOUTES les pages
+  console.log('🔍 Tentative de restauration du player...');
+  restorePlayer();
+  startSyncInterval();
+
+  // Si on n'est PAS sur la page episodes, arrêter ici
+  if (!container) {
+    console.log('📄 Page non-episodes, player restauré');
+    return;
+  }
+
+  // ========== CODE SPÉCIFIQUE À LA PAGE EPISODES ==========
+
+  const LOAD_COUNT = 6;
+  const CACHE_KEY = 'podcast_cache';
+  const CACHE_DURATION = 30 * 60 * 1000; // 30 minutes
+  
+  let visibleCount = LOAD_COUNT;
+  let episodes = [];
+  let channelCategory = "Podcast";
+
+  // Vérifier si on vient d'un lien direct (depuis accueil)
+  const urlParams = new URLSearchParams(window.location.search);
+  const targetEpisode = urlParams.get('episode');
+
+  // Skeleton loader (affichage instantané)
+  showSkeletonLoader();
+
+  // Vérifier le cache d'abord
+  const cachedData = getCachedData();
+  if (cachedData) {
+    console.log("📦 Chargement depuis le cache");
+    episodes = cachedData.episodes;
+    channelCategory = cachedData.channelCategory;
+    renderEpisodes();
+    
+    // Mettre à jour en arrière-plan
+    fetchRSSInBackground();
+  } else {
+    // Pas de cache, charger normalement
+    fetchRSS();
+  }
+
+  function showSkeletonLoader() {
+    const skeletons = Array(3).fill(0).map(() => `
+      <article class="cat-pod" style="opacity: 0.6; pointer-events: none;">
+        <div class="play-icon" style="background: #e0e0e0;"></div>
+        <div class="pod-text" style="width: 100%;">
+          <div style="height: 20px; background: #e0e0e0; border-radius: 4px; width: 30%; margin-bottom: 8px;"></div>
+          <div style="height: 24px; background: #e0e0e0; border-radius: 4px; width: 80%; margin-bottom: 8px;"></div>
+          <div style="height: 16px; background: #e0e0e0; border-radius: 4px; width: 100%; margin-bottom: 4px;"></div>
+          <div style="height: 16px; background: #e0e0e0; border-radius: 4px; width: 90%;"></div>
+        </div>
+      </article>
+    `).join('');
+    container.innerHTML = skeletons;
+  }
+
+  function getCachedData() {
+    try {
+      const cached = localStorage.getItem(CACHE_KEY);
+      if (!cached) return null;
+      
+      const data = JSON.parse(cached);
+      const age = Date.now() - data.timestamp;
+      
+      if (age < CACHE_DURATION) {
+        return data;
+      }
+      localStorage.removeItem(CACHE_KEY);
+      return null;
+    } catch (e) {
+      return null;
+    }
+  }
+
+  function setCachedData(data) {
+    try {
+      localStorage.setItem(CACHE_KEY, JSON.stringify({
+        episodes: data.episodes,
+        channelCategory: data.channelCategory,
+        timestamp: Date.now()
+      }));
+    } catch (e) {
+      console.warn("Cache non disponible");
+    }
+  }
+
+  function fetchRSSInBackground() {
+    fetch(`https://api.allorigins.win/raw?url=${encodeURIComponent(RSS_URL)}`)
+      .then(res => res.text())
+      .then(parseRSSAndUpdate)
+      .catch(() => {}); // Silencieux si erreur
+  }
+
+  function fetchRSS() {
+    fetch(`https://api.allorigins.win/raw?url=${encodeURIComponent(RSS_URL)}`)
+      .then(res => {
+        if (!res.ok) throw new Error("Erreur de chargement");
+        return res.text();
+      })
+      .then(parseRSSAndUpdate)
+      .catch(err => {
+        console.error("Erreur RSS:", err);
+        container.innerHTML = `
+          <div style="text-align: center; padding: 60px 20px;">
+            <p style="color: #e74c3c; font-size: 18px; margin-bottom: 10px;">⚠️ Erreur de chargement</p>
+            <p style="color: #666;">Impossible de charger les podcasts. Veuillez réessayer.</p>
+          </div>
+        `;
+      });
+  }
+
+  function parseRSSAndUpdate(xmlContent) {
+    const parser = new DOMParser();
+    const xml = parser.parseFromString(xmlContent, "text/xml");
+
+    if (xml.querySelector("parsererror")) {
+      throw new Error("Erreur XML");
+    }
+
+    const channelCat = xml.querySelector("channel > category");
+    if (channelCat) channelCategory = channelCat.textContent;
+
+    const items = xml.querySelectorAll("item");
+    const newEpisodes = [];
+
+    // Parse rapide avec boucle optimisée
+    for (let i = 0; i < items.length; i++) {
+      const item = items[i];
+      const enclosure = item.querySelector("enclosure");
+      const audio = enclosure?.getAttribute("url");
+      
+      if (!audio) continue;
+
+      const categoryTag = item.querySelector("category, itunes\\:category");
+      const durationTag = item.querySelector("itunes\\:duration, duration");
+      
+      newEpisodes.push({
+        title: item.querySelector("title")?.textContent || "Sans titre",
+        description: item.querySelector("description")?.textContent || "",
+        pubDate: item.querySelector("pubDate")?.textContent || "",
+        audio: audio,
+        duration: durationTag?.textContent || null,
+        category: categoryTag?.textContent || channelCategory
+      });
+    }
+
+    if (newEpisodes.length > 0) {
+      episodes = newEpisodes;
+      
+      // Mettre en cache
+      setCachedData({ episodes, channelCategory });
+      
+      // Générer SEO Schema
+      generatePodcastSchema(newEpisodes);
+      
+      // Re-render
+      renderEpisodes();
+    }
+  }
+
+  function generatePodcastSchema(episodesList) {
+    const schema = {
+      "@context": "https://schema.org",
+      "@type": "PodcastSeries",
+      "name": "Échos Perdus",
+      "description": "Un espace où les voix retrouvent leur force. Podcast engagé qui offre une voix à celles qu'on entend trop rarement.",
+      "url": window.location.origin,
+      "author": {
+        "@type": "Organization",
+        "name": "Échos Perdus"
+      },
+      "image": window.location.origin + "/images/logo2.jpg",
+      "inLanguage": "fr-FR",
+      "genre": ["Society & Culture", "Health & Fitness"],
+      "webFeed": "https://anchor.fm/s/10dbe85d0/podcast/rss"
+    };
+
+    if (episodesList && episodesList.length > 0) {
+      schema.episode = episodesList.slice(0, 10).map((ep, index) => ({
+        "@type": "PodcastEpisode",
+        "name": ep.title,
+        "description": (ep.description || '').replace(/<[^>]*>/g, '').substring(0, 200),
+        "url": `${window.location.origin}/episodes.html?episode=${encodeURIComponent(ep.title)}`,
+        "datePublished": ep.pubDate,
+        "duration": ep.duration || "PT10M",
+        "associatedMedia": {
+          "@type": "MediaObject",
+          "contentUrl": ep.audio
+        },
+        "episodeNumber": episodesList.length - index
+      }));
+    }
+
+    const script = document.createElement('script');
+    script.type = 'application/ld+json';
+    script.text = JSON.stringify(schema);
+    document.head.appendChild(script);
+    
+    console.log("✅ SEO Schema ajouté pour", episodesList.length, "épisodes");
+  }
+
+  function getFilteredEpisodes() {
+    let filtered = episodes;
+
+    // Filtre de recherche uniquement
+    if (searchInput && searchInput.value.trim()) {
+      const searchValue = searchInput.value.toLowerCase();
+      filtered = filtered.filter(ep =>
+        ep.title.toLowerCase().includes(searchValue) ||
+        ep.description.toLowerCase().includes(searchValue)
+      );
+    }
+
+    return filtered;
+  }
+
+  function renderEpisodes() {
+    if (!container) return;
+    
+    const list = getFilteredEpisodes();
+    const toShow = list.slice(0, visibleCount);
+    
+    if (toShow.length === 0) {
+      container.innerHTML = "<p style='text-align: center; padding: 40px; color: #666;'>Aucun résultat trouvé.</p>";
+      updateLoadMore(list);
+      return;
+    }
+
+    // Optimisation: créer HTML string puis insérer une fois
+    const html = toShow.map(ep => {
+      const date = new Date(ep.pubDate).toLocaleDateString("fr-FR", {
+        day: "numeric",
+        month: "long",
+        year: "numeric"
+      });
+
+      const cleanDesc = ep.description.replace(/<[^>]*>/g, '').substring(0, 120) + '...';
+      const durationHTML = ep.duration ? `<span class="duration">⏱ ${formatDuration(ep.duration)}</span>` : '';
+
+      // Ajouter bouton de partage avec meilleur UX
+      return `
+        <article class="cat-pod" data-episode-title="${ep.title}">
+          <div class="play-icon" data-audio="${ep.audio}">▶</div>
+          <div class="pod-text">
+            <span class="pod-category">${ep.category}</span>
+            <p class="pod-title">${ep.title}</p>
+            <p class="pod-desc">${cleanDesc}</p>
+            <div class="pod-info">
+              ${durationHTML}
+              <span class="date">📅 ${date}</span>
+              <button class="share-btn" data-episode="${encodeURIComponent(ep.title)}" title="Partager cet épisode">
+                <span class="share-icon">🔗</span>
+                <span class="share-text">Partager</span>
+              </button>
+            </div>
+          </div>
+        </article>
+      `;
+    }).join('');
+
+    container.innerHTML = html;
+    bindAudio();
+    bindShareButtons();
+    updateLoadMore(list);
+
+    // Si on vient d'un lien direct, scroll et auto-play
+    if (targetEpisode) {
+      setTimeout(() => scrollAndPlayEpisode(targetEpisode), 500);
+    }
+  }
+
+  function bindShareButtons() {
+    document.querySelectorAll('.share-btn').forEach(btn => {
+      btn.onclick = (e) => {
+        e.stopPropagation();
+        
+        const episodeTitle = decodeURIComponent(btn.dataset.episode);
+        const shareUrl = `${window.location.origin}/episodes.html?episode=${encodeURIComponent(episodeTitle)}`;
+        
+        // Mobile: Native share (meilleure UX)
+        if (navigator.share) {
+          navigator.share({
+            title: episodeTitle,
+            text: `🎧 Écoutez "${episodeTitle}" sur Échos Perdus`,
+            url: shareUrl
+          }).catch(() => {});
+          return;
+        }
+        
+        // Desktop: Copy to clipboard
+        navigator.clipboard.writeText(shareUrl).then(() => {
+          const icon = btn.querySelector('.share-icon');
+          const text = btn.querySelector('.share-text');
+          
+          // Success feedback
+          icon.textContent = '✓';
+          text.textContent = 'Copié';
+          btn.classList.add('copied');
+          
+          // Reset après 2 secondes
+          setTimeout(() => {
+            icon.textContent = '🔗';
+            text.textContent = 'Partager';
+            btn.classList.remove('copied');
+          }, 2000);
+        }).catch(() => {
+          // Fallback si clipboard ne marche pas
+          alert(`Copiez ce lien :\n${shareUrl}`);
+        });
+      };
+    });
+  }
+
+  function scrollAndPlayEpisode(episodeTitle) {
+    const allPodcasts = document.querySelectorAll('.cat-pod');
+    
+    for (let pod of allPodcasts) {
+      const title = pod.getAttribute('data-episode-title');
+      if (title === episodeTitle) {
+        // Highlight
+        pod.style.border = '3px solid #FFC300';
+        pod.style.boxShadow = '0 8px 30px rgba(255, 195, 0, 0.5)';
+        
+        // Scroll smooth
+        pod.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        
+        // Auto-play après scroll complet (1500ms pour être sûr)
+        setTimeout(() => {
+          const playBtn = pod.querySelector('.play-icon');
+          const player = document.getElementById("player");
+          
+          if (playBtn && player) {
+            // Simuler un vrai clic utilisateur
+            const audioUrl = playBtn.getAttribute('data-audio');
+            if (audioUrl) {
+              player.src = audioUrl;
+              
+              // Attendre que le player soit prêt
+              player.addEventListener('loadeddata', function playOnce() {
+                player.play().then(() => {
+                  playBtn.textContent = "❚❚";
+                  console.log("✅ Podcast lancé automatiquement");
+                }).catch(err => {
+                  console.log("ℹ️ Auto-play bloqué par le navigateur, cliquez pour écouter");
+                });
+                player.removeEventListener('loadeddata', playOnce);
+              });
+              
+              player.load();
+            }
+          }
+        }, 1500);
+        
+        break;
+      }
+    }
+  }
+
+  function formatDuration(duration) {
+    if (!duration) return '';
+    
+    if (duration.includes(':')) {
+      const parts = duration.split(':');
+      const hours = parseInt(parts[0]);
+      const mins = parseInt(parts[1]);
+      
+      if (hours > 0) return `${hours}h ${mins}min`;
+      return `${mins} min`;
+    }
+    
+    const totalMins = Math.floor(parseInt(duration) / 60);
+    if (totalMins >= 60) {
+      const h = Math.floor(totalMins / 60);
+      const m = totalMins % 60;
+      return `${h}h ${m}min`;
+    }
+    return `${totalMins} min`;
+  }
+
+  function updateLoadMore(list) {
+    if (!loadMoreBtn) return;
+    loadMoreBtn.style.display = visibleCount >= list.length ? "none" : "inline-block";
+  }
+
+  loadMoreBtn?.addEventListener("click", () => {
+    visibleCount += LOAD_COUNT;
+    renderEpisodes();
+  });
+
+  searchInput?.addEventListener("input", () => {
+    visibleCount = LOAD_COUNT;
+    renderEpisodes();
+  });
+
+  function bindAudio() {
+    const player = document.getElementById("player");
+    if (!player) return;
+    
+    let currentBtn = null;
+    let currentEpisode = null;
+
+    document.querySelectorAll(".play-icon").forEach(btn => {
+      btn.onclick = () => {
+        if (!btn.dataset.audio) return;
+
+        const podCard = btn.closest('.cat-pod');
+        const episodeTitle = podCard?.querySelector('.pod-title')?.textContent || 'Podcast';
+
+        if (currentBtn === btn && !player.paused) {
+          player.pause();
+          btn.textContent = "▶";
+          hideStickyPlayer();
+          return;
+        }
+
+        if (currentBtn) currentBtn.textContent = "▶";
+        
+        player.src = btn.dataset.audio;
+        player.play().catch(err => {
+          console.error("Erreur de lecture:", err);
+          alert("Impossible de lire ce podcast. Veuillez réessayer.");
+        });
+        
+        btn.textContent = "❚❚";
+        currentBtn = btn;
+        currentEpisode = episodeTitle;
+        
+        // Afficher sticky player
+        showStickyPlayer(episodeTitle, btn.dataset.audio);
+      };
     });
 
-    // --- D3 setup ---
-    let svg, g, simulation, currentScale = 1;
-    const FONT_SIZE_L1 = 12, FONT_SIZE_L2 = 11;
+    player.onpause = () => {
+      if (currentBtn) currentBtn.textContent = "▶";
+    };
 
-    function updateTextSizes(){
-      const invScale = Math.min(4, Math.max(0.8,1/currentScale));
-      const baseScale = Math.min(1.6, Math.max(0.6,1/currentScale));
-      const VIS_THRESHOLD = 0.9;
-      const isZoomedOut = currentScale < VIS_THRESHOLD;
-      d3.selectAll(".main-label tspan").style("font-size",`${FONT_SIZE_L1*invScale}px`);
-      d3.selectAll(".sub-label").style("font-size",`${FONT_SIZE_L2*baseScale}px`).style("opacity",isZoomedOut?0:1);
+    player.onended = () => {
+      if (currentBtn) currentBtn.textContent = "▶";
+      hideStickyPlayer();
+    };
+
+    // Restaurer le player si on revient sur la page
+    if (!player.paused && player.src) {
+      const playingBtn = document.querySelector('.play-icon[data-audio="' + player.src + '"]');
+      if (playingBtn) {
+        playingBtn.textContent = "❚❚";
+        currentBtn = playingBtn;
+      }
     }
+  }
 
-    function initializeSimulation(){
-      container.innerHTML = '';
-      const size = getContainerSize();
-      width = size.width; height = size.height;
+  function showStickyPlayer(title, audioUrl) {
+    let stickyPlayer = document.getElementById('sticky-player');
+    
+    if (!stickyPlayer) {
+      stickyPlayer = document.createElement('div');
+      stickyPlayer.id = 'sticky-player';
+      stickyPlayer.innerHTML = `
+        <div class="sticky-player-content">
+          <div class="sticky-progress-container">
+            <div class="sticky-progress-bar"></div>
+          </div>
+          <div class="sticky-main">
+            <div class="sticky-info">
+              <div class="sticky-artwork">🎙️</div>
+              <div class="sticky-text">
+                <p class="sticky-title"></p>
+                <p class="sticky-subtitle">Échos Perdus</p>
+              </div>
+            </div>
+            
+            <div class="sticky-controls-center">
+              <div class="sticky-buttons">
+                <button class="sticky-btn sticky-prev-btn" title="Précédent">⏮</button>
+                <button class="sticky-btn sticky-play-btn">▶</button>
+                <button class="sticky-btn sticky-next-btn" title="Suivant">⏭</button>
+              </div>
+              <div class="sticky-time-display">
+                <span class="sticky-current-time">0:00</span>
+                <span class="sticky-duration">0:00</span>
+              </div>
+            </div>
+            
+            <div class="sticky-controls-right">
+              <div class="sticky-volume-container">
+                <span class="sticky-volume-icon">🔊</span>
+                <div class="sticky-volume-slider">
+                  <div class="sticky-volume-bar"></div>
+                </div>
+              </div>
+              <button class="sticky-close-btn" title="Fermer">✕</button>
+            </div>
+          </div>
+        </div>
+      `;
+      document.body.appendChild(stickyPlayer);
 
-      svg = d3.select(container).append('svg')
-        .attr('width', width).attr('height', height)
-        .call(d3.zoom().scaleExtent([0.35,4]).on('zoom',(event)=>{ g.attr('transform',event.transform); currentScale=event.transform.k; updateTextSizes(); }))
-        .on('dblclick.zoom', null);
+      const player = document.getElementById('player');
+      const playBtn = stickyPlayer.querySelector('.sticky-play-btn');
+      const closeBtn = stickyPlayer.querySelector('.sticky-close-btn');
+      const progressContainer = stickyPlayer.querySelector('.sticky-progress-container');
+      const progressBar = stickyPlayer.querySelector('.sticky-progress-bar');
+      const currentTimeEl = stickyPlayer.querySelector('.sticky-current-time');
+      const durationEl = stickyPlayer.querySelector('.sticky-duration');
+      const volumeSlider = stickyPlayer.querySelector('.sticky-volume-slider');
+      const volumeBar = stickyPlayer.querySelector('.sticky-volume-bar');
+      const volumeIcon = stickyPlayer.querySelector('.sticky-volume-icon');
 
-      g = svg.append('g');
-
-      simulation = d3.forceSimulation(nodes)
-        .force('link', d3.forceLink(links).id(d=>d.id).distance(d=>d.distance||60).strength(d=>d.strength??1))
-        .force('charge', d3.forceManyBody().strength(-150))
-        .force('center', d3.forceCenter(width/2, height/2))
-        .force('collision', d3.forceCollide().radius(d => (d.size||8)+(d.level===1?6:8)))
-        .on('tick', ticked);
-
-      updateGraph();
-      updateTextSizes();
-    }
-
-    function updateGraph(){
-      // LINKS
-      const linkGroup = g.selectAll('.links').data([null]).join('g').attr('class','links');
-      let linkSel = linkGroup.selectAll('line').data(links, d => `${d.source.id??d.source}-${d.target.id??d.target}`);
-      linkSel.exit().transition().duration(300).attr('stroke-opacity',0).remove();
-      linkSel = linkSel.enter().append('line').attr('class','link').attr('stroke-opacity',0).merge(linkSel).attr('stroke-opacity',1);
-
-      // NODES
-      const nodeGroup = g.selectAll('.nodes').data([null]).join('g').attr('class','nodes');
-      let nodeSel = nodeGroup.selectAll('g.node').data(nodes,d=>d.id);
-      const nodeEnter = nodeSel.enter().append('g').attr('class',d=>`node level-${d.level}`).attr('style',d=>`--node-color:${d.color};`).attr('opacity',0).call(drag(simulation));
-
-      nodeEnter.append('circle').attr('r',d=>d.size).attr('fill',d=>d.color);
-
-      nodeEnter.each(function(d){
-        const group = d3.select(this);
-        if(d.level===1){
-          const text = group.append('text').attr('class','main-label').attr('text-anchor','middle').attr('x',0);
-          const words = d.nameWords || String(d.name).split(/\s+/);
-          const lineLimit = 16; let current=''; const lines=[];
-          words.forEach(word=>{
-            const test = current.length===0?word:current+' '+word;
-            if(test.length<=lineLimit) current=test; else { if(current.length) lines.push(current); current=word; }
-          });
-          if(current.length) lines.push(current);
-          lines.forEach((ln,i)=>{ text.append('tspan').attr('x',0).attr('dy',i===0?'0em':'1em').text(ln); });
-          const totalLines = lines.length; text.attr('y',`${-(totalLines-1)*0.5}em`);
+      // Play/Pause
+      playBtn.onclick = () => {
+        if (player.paused) {
+          player.play();
         } else {
-          group.append('text').attr('class',d.level===2?'sub-label':'root-label').attr('dy','0.35em').attr('x',0).attr('text-anchor','middle').text(d=>d.level>=2?toSentenceCase(d.name):d.name);
+          player.pause();
         }
-      });
+      };
 
-      nodeEnter.transition().duration(400).attr('opacity',1);
-      nodeSel.exit().transition().duration(300).attr('opacity',0).remove();
+      player.onplay = () => {
+        playBtn.textContent = '❚❚';
+      };
 
-      simulation.nodes(nodes);
-      simulation.force('link').links(links);
-      simulation.alpha(1).restart();
-      updateTextSizes();
-    }
+      player.onpause = () => {
+        playBtn.textContent = '▶';
+      };
 
-    function ticked(){
-      g.selectAll('g.node').attr('transform',d=>`translate(${d.x},${d.y})`);
-      g.selectAll('line.link').attr('x1',d=>d.source.x).attr('y1',d=>d.source.y).attr('x2',d=>d.target.x).attr('y2',d=>d.target.y);
-      g.selectAll('g.node').each(function(d){
-        if(d.level===2){
-          const isLeft = d.x < width/2;
-          const textEl = d3.select(this).select('text');
-          const offset = (d.size||12)+8;
-          textEl.attr('text-anchor',isLeft?'end':'start').attr('x',isLeft?-offset:offset);
+      // Progress bar
+      player.ontimeupdate = () => {
+        if (player.duration) {
+          const progress = (player.currentTime / player.duration) * 100;
+          progressBar.style.width = progress + '%';
+          currentTimeEl.textContent = formatTime(player.currentTime);
         }
-      });
+      };
+
+      player.onloadedmetadata = () => {
+        durationEl.textContent = formatTime(player.duration);
+      };
+
+      // Click progress bar to seek
+      progressContainer.onclick = (e) => {
+        const rect = progressContainer.getBoundingClientRect();
+        const percent = (e.clientX - rect.left) / rect.width;
+        player.currentTime = percent * player.duration;
+      };
+
+      // Volume control
+      volumeSlider.onclick = (e) => {
+        const rect = volumeSlider.getBoundingClientRect();
+        const percent = (e.clientX - rect.left) / rect.width;
+        player.volume = Math.max(0, Math.min(1, percent));
+        volumeBar.style.width = (percent * 100) + '%';
+        updateVolumeIcon(percent);
+      };
+
+      volumeIcon.onclick = () => {
+        if (player.volume > 0) {
+          player.dataset.prevVolume = player.volume;
+          player.volume = 0;
+          volumeBar.style.width = '0%';
+          volumeIcon.textContent = '🔇';
+        } else {
+          player.volume = player.dataset.prevVolume || 1;
+          volumeBar.style.width = (player.volume * 100) + '%';
+          updateVolumeIcon(player.volume);
+        }
+      };
+
+      function updateVolumeIcon(volume) {
+        if (volume === 0) volumeIcon.textContent = '🔇';
+        else if (volume < 0.5) volumeIcon.textContent = '🔉';
+        else volumeIcon.textContent = '🔊';
+      }
+
+      // Close button
+      closeBtn.onclick = () => {
+        player.pause();
+        hideStickyPlayer();
+        try {
+          localStorage.removeItem('currentPodcast');
+        } catch (e) {}
+      };
+
+      // Prev/Next buttons (placeholder)
+      stickyPlayer.querySelector('.sticky-prev-btn').onclick = () => {
+        console.log('Previous episode (not implemented)');
+      };
+      
+      stickyPlayer.querySelector('.sticky-next-btn').onclick = () => {
+        console.log('Next episode (not implemented)');
+      };
     }
 
-    function drag(sim){
-      function started(event,d){ d.fx=d.x; d.fy=d.y; sim.alphaTarget(0.1).restart(); }
-      function dragged(event,d){ d.fx=event.x; d.fy=event.y; sim.alpha(0.1).restart(); }
-      function ended(event,d){ if(!event.active) sim.alphaTarget(0); }
-      return d3.drag().on('start',started).on('drag',dragged).on('end',ended);
+    stickyPlayer.querySelector('.sticky-title').textContent = title;
+    stickyPlayer.classList.add('show');
+    
+    // Sauvegarder l'état initial
+    try {
+      const player = document.getElementById('player');
+      localStorage.setItem('currentPodcast', JSON.stringify({
+        title: title,
+        audio: audioUrl,
+        isPlaying: !player.paused,
+        currentTime: player.currentTime || 0
+      }));
+    } catch (e) {}
+  }
+
+  function formatTime(seconds) {
+    if (isNaN(seconds)) return '0:00';
+    const mins = Math.floor(seconds / 60);
+    const secs = Math.floor(seconds % 60);
+    return `${mins}:${secs.toString().padStart(2, '0')}`;
+  }
+
+  function hideStickyPlayer() {
+    const stickyPlayer = document.getElementById('sticky-player');
+    if (stickyPlayer) {
+      stickyPlayer.classList.remove('show');
     }
-
-    function toSentenceCase(str){ if(!str) return str; str=String(str).toLowerCase(); return str.charAt(0).toUpperCase()+str.slice(1); }
-
-    function handleResize(){ const rect=getContainerSize(); width=rect.width;height=rect.height;if(svg){svg.attr('width',width).attr('height',height);} if(simulation){simulation.force('center',d3.forceCenter(width/2,height/2));simulation.alpha(0.6).restart();} }
-
-    window.addEventListener('resize',()=>{ handleResize(); updateTextSizes(); });
-
-    initializeSimulation();
-    window.__d3_data = { nodes, links, simulation };
-
+    try {
+      localStorage.removeItem('currentPodcast');
+    } catch (e) {}
   }
+
+  // Restaurer le podcast en cours si on change de page
+  function restorePlayer() {
+    try {
+      const saved = localStorage.getItem('currentPodcast');
+      if (!saved) return;
+      
+      const data = JSON.parse(saved);
+      const player = document.getElementById('player');
+      
+      if (!player || !data.audio) return;
+
+      // Vérifier si c'est le même audio
+      if (player.src !== data.audio) {
+        player.src = data.audio;
+        player.currentTime = data.currentTime || 0;
+      }
+
+      // Restaurer le player visuel
+      showStickyPlayer(data.title, data.audio);
+
+      // Reprendre la lecture si c'était en train de jouer
+      if (data.isPlaying) {
+        player.play().catch(() => {
+          console.log('Lecture automatique bloquée');
+        });
+      }
+
+      // Synchroniser l'état
+      const stickyPlayer = document.getElementById('sticky-player');
+      if (stickyPlayer && data.currentTime) {
+        player.currentTime = data.currentTime;
+      }
+    } catch (e) {
+      console.error('Erreur restoration:', e);
+    }
   }
+
+  // Sauvegarder l'état toutes les secondes
+  function startSyncInterval() {
+    const player = document.getElementById('player');
+    if (!player) return;
+
+    setInterval(() => {
+      try {
+        const saved = localStorage.getItem('currentPodcast');
+        if (saved && !player.paused) {
+          const data = JSON.parse(saved);
+          data.currentTime = player.currentTime;
+          data.isPlaying = !player.paused;
+          localStorage.setItem('currentPodcast', JSON.stringify(data));
+        }
+      } catch (e) {}
+    }, 1000);
+  }
+
+  // Restaurer au chargement de la page
+  console.log('🔍 Tentative de restauration du player...');
+  restorePlayer();
+  startSyncInterval();
+
+  // Debug: afficher l'état du player toutes les 3 secondes
+  setInterval(() => {
+    const saved = localStorage.getItem('currentPodcast');
+    const player = document.getElementById('player');
+    console.log('📊 État actuel:', {
+      'localStorage': saved ? JSON.parse(saved) : null,
+      'player exists': !!player,
+      'player.src': player?.src || 'N/A',
+      'player.paused': player?.paused,
+      'sticky visible': document.getElementById('sticky-player')?.classList.contains('show')
+    });
+  }, 3000);
 
 });
-
-
-
-  

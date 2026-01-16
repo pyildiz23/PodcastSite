@@ -3,377 +3,95 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Nos podcasts — Échos Perdus</title>
+    <title>Papillon Français</title>
   <link rel="stylesheet" href="global.css">
   <link rel="stylesheet" href="episodes.css">
 </head>
-<body>
-  <!-- Navbar (réutilise ta navbar existante) -->
-    <nav class="navbar">
-        <a href="index.html"> <img src="images/logo2.jpg" alt="logo"></a>
 
-          <!-- HAMBURGER BUTTON -->
-    <button class="menu-toggle">☰</button>
-        <ul class="nav-links">
-            <li><a href="index.html">Accueil</a></li>
-            <li><a href="apropos.html">À propos</a></li>
-            <li><a href="episodes.html">Épisodes</a></li>
-            <li><a href="partager.html">Contact</a></li>
-           
-        </ul>
-        
-    </nav>
-  <header class="pod-hero" id="pod-hero">
-    <h1>NOS PODCASTS</h1>
-    <p>Plongez dans des conversations puissantes qui inspirent, guérissent et nous
-connectent toutes.</p>
-  </header>
-    <div class="search-wrapper-top">
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+  <a href="index.html"><img src="images/logo2.png" alt="logo"></a>
+  <button class="menu-toggle">☰</button>
+  <ul class="nav-links">
+    <li><a href="index.html">Accueil</a></li>
+     <li><a href="episodes.html">Épisodes</a></li>
+    <li><a href="apropos.html">À propos</a></li>
+    <li><a href="partager.html">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO -->
+<header class="pod-hero" id="pod-hero">
+  <h1>Nos Podcasts</h1>
+  <p>Explorez nos épisodes pour apprendre le français à travers la culture, la cuisine, les voyages 
+    et des expressions amusantes.</p>
+</header>
+
+<!-- SEARCH -->
+<div class="search-wrapper-top">
   <span class="search-icon">🔎</span>
   <input type="text" class="search-input" placeholder="Rechercher un épisode">
 </div>
-  
+
+
 <main>
 
-<!-- Catégories -->
+<!-- PODCASTS (RSS) -->
 <section class="pod-categories">
-  <div class="cat-row">
-
-    <article class="cat-pod">
-     <div class="play-icon" data-audio="audios/audio1.m4a">▶</div>
-      <div class="pod-text">
-        <h4>VIOLENCE ET RECONSTRUCTION</h4>
-        <p class="pod-title">L'excision, ça vous parle ?</p>
-        <p class="pod-desc">Briser le silence autour de cette violence 
-            subie dans l’enfance, explorer les conséquences physiques et psychologiques, parler reconstruction et dignité.</p>
-        <div class="pod-info">
-          <span class="duration">42 min</span>
-          <span class="speaker">Natalia</span>
-        </div>
-      </div>
-    </article>
-
-    <article class="cat-pod">
-      <div class="play-icon" data-audio="audios/audio2.m4a">▶</div>
-      <div class="pod-text">
-        <h4>RELATION ET CULTURE</h4>
-        <p class="pod-title"> La polygamie et le divorce, ça vous parle ?</p>
-        <p class="pod-desc">
-            Réflexion sur les mariages multiples, les femmes invisibles,
-             les séparations stigmatisées, et les effets sur les enfants.
-        </p>
-        <div class="pod-info">
-          <span class="duration">38 min</span>
-          <span class="speaker">Julien</span>
-        </div>
-      </div>
-    </article>
-
-    <article class="cat-pod">
-      <div class="play-icon" data-audio="audios/audio2.m4a">▶</div>
-      <div class="pod-text">
-        <h4>VIOLENCE ET RECONSTRUCTION</h4>
-        <p class="pod-title">Le mariage forcé, ça vous parle ?</p>
-        <p class="pod-desc"> Quand le consentement est nié. Témoignages, droit, pressions familiales et résistances.</p>
-        <div class="pod-info">
-          <span class="duration">30 min</span>
-          <span class="speaker">Sofia</span>
-        </div>
-      </div>
-    </article>
-
-  </div>
-
-  <div class="cat-row">
-
-    <article class="cat-pod">
-      <div class="play-icon" data-audio="audios/audio2.m4a">▶</div>
-      <div class="pod-text">
-        <h4>VIOLENCE ET RECONSTRUCTION</h4>
-        <p class="pod-title">Pression psychologique et sociale, ça vous parle ?</p>
-        <p class="pod-desc">Être une femme “comme il faut” : ce que la société nous impose, ce que ça détruit,
-            et comment on s’en libère.</p>
-        <div class="pod-info">
-          <span class="duration">42 min</span>
-          <span class="speaker">Natalia</span>
-        </div>
-      </div>
-    </article>
-
-    <article class="cat-pod">
-      <div class="play-icon" data-audio="audios/audio2.m4a">▶</div>
-      <div class="pod-text">
-        <h4>VIOLENCE ET RECONSTRUCTION</h4>
-        <p class="pod-title">L’inceste, et si on en parlait enfin ?</p>
-        <p class="pod-desc">Sujet tabou parmi les tabous. Rompre l’omerta pour protéger, réparer, prévenir.</p>
-        <div class="pod-info">
-          <span class="duration">38 min</span>
-          <span class="speaker">Julien</span>
-        </div>
-      </div>
-    </article>
-
-    <article class="cat-pod">
-      <div class="play-icon" data-audio="audios/audio2.m4a">▶</div>
-      <div class="pod-text">
-        <h4>RELATION ET CULTURE</h4>
-        <p class="pod-title">La polygamie et le divorce (Partie 2)</p>
-        <p class="pod-desc">Approfondir le débat : regards croisés entre générations, impacts juridiques et religieux.</p>
-        <div class="pod-info">
-          <span class="duration">30 min</span>
-          <span class="speaker">Sofia</span>
-        </div>
-      </div>
-    </article>
-
-  </div>
-  <div class="cat-row">
-
-  <article class="cat-pod">
-    <div class="play-icon" data-audio="audios/audio2.m4a">▶</div>
-    <div class="pod-text">
-      <h4>ÉDUCATION ET SOCIÉTÉ</h4>
-      <p class="pod-title" id="education">L’éducation des filles, ça vous parle ?</p>
-      <p class="pod-desc">Explorer les obstacles, stéréotypes et opportunités dans l'éducation des filles à travers le monde.</p>
-      <div class="pod-info">
-        <span class="duration">35 min</span>
-        <span class="speaker">Claire</span>
-      </div>
-    </div>
-  </article>
-
-  <article class="cat-pod">
-    <div class="play-icon" data-audio="audios/audio2.m4a">▶</div>
-    <div class="pod-text">
-      <h4>RELATIONS & CULTURE</h4>
-      <p class="pod-title">LGBTQ+ : nos identités mises à l’épreuve</p>
-      <p class="pod-desc">Discussions sur les défis, l’acceptation et les expériences personnelles des communautés LGBTQ+.</p>
-      <div class="pod-info">
-        <span class="duration">40 min</span>
-        <span class="speaker">Julien</span>
-      </div>
-    </div>
-  </article>
-
-  <article class="cat-pod">
-    <div class="play-icon" data-audio="audios/audio2.m4a">▶</div>
-    <div class="pod-text">
-      <h4>SANTÉ & BIEN-ÊTRE</h4>
-      <p class="pod-title">La sexualité, parlons-en</p>
-      <p class="pod-desc">Aborder ouvertement les questions de sexualité, consentement et éducation sexuelle dans nos sociétés.</p>
-      <div class="pod-info">
-        <span class="duration">32 min</span>
-        <span class="speaker">Sofia</span>
-      </div>
-    </div>
-  </article>
-
-</div>
-
- <div class="cat-row">
-
-  <article class="cat-pod">
-    <div class="play-icon" data-audio="audios/audio2.m4a">▶</div>
-    <div class="pod-text">
-      <h4>BEAUTÉ & IDENTITÉ</h4>
-      <p class="pod-title">Cheveux afros, braids, perruques : identité ou camouflage ?</p>
-      <p class="pod-desc">Discussion sur l'expression de soi, la pression sociale et l'acceptation à travers les choix capillaires.</p>
-      <div class="pod-info">
-        <span class="duration">28 min</span>
-        <span class="speaker">Natalia</span>
-      </div>
-    </div>
-  </article>
-
-  <article class="cat-pod">
-    <div class="play-icon" data-audio="audios/audio2.m4a">▶</div>
-    <div class="pod-text">
-      <h4>TRADITION & SOCIÉTÉ</h4>
-      <p class="pod-title">Rites de mariage et ethnies : traditions, pression, évolution</p>
-      <p class="pod-desc">Analyse des rituels de mariage, de la pression sociale et de l’évolution des traditions à travers différentes cultures.</p>
-      <div class="pod-info">
-        <span class="duration">37 min</span>
-        <span class="speaker">Claire</span>
-      </div>
-    </div>
-  </article>
-
-  <article class="cat-pod">
-    <div class="play-icon" data-audio="audios/audio2.m4a">▶</div>
-    <div class="pod-text">
-      <h4>SOCIÉTÉ & CROYANCES</h4>
-      <p class="pod-title">Superstitions, sorcellerie et culpabilisation des femmes</p>
-      <p class="pod-desc">Explorer comment certaines croyances impactent le rôle des femmes et influencent la société.</p>
-      <div class="pod-info">
-        <span class="duration">34 min</span>
-        <span class="speaker">Julien</span>
-      </div>
-    </div>
-  </article>
-
-</div>
-
-
-  </div>
+  <div id="episodes-container" class="cat-row"></div>
 </section>
+
 <div class="episode-actions">
-    <button class="btn-left">Voir tous les épisodes</button>
-</div>
- <!-- <section class="categories">
-    <h2>Quelle thématique de Podcasts vous inspire ?</h2>
-    <p>Trouvez facilement des épisodes selon vos centres d’intérêt.</p>
-    <div class="category-cards">
-        <div class="category-card"><a href="#pod-hero">Santé</a></div>
-        <div class="category-card"><a href="#pod-hero">Société</a></div>
-        <div class="category-card"><a href="#pod-hero">Éducation</a></div>
-        <div class="category-card"><a href="#pod-hero">Culture</a></div>
-    </div>
-</section> -->
-
-<!-- Audio player global -->
-<div id="audio-player" style="margin: 40px auto; text-align:center;">
-  <audio id="player" controls>
-    <source src="" type="audio/mp4">
-    Votre navigateur ne supporte pas la lecture audio.
-  </audio>
+  <button id="load-more" class="btn-left">
+    Voir tous les épisodes
+  </button>
 </div>
 
-  <!-- Texte explicatif -->
+<!-- NOTE -->
 <section class="pod-note">
   <blockquote>
-    « Chaque voix compte, chaque histoire mérite d'être entendue. » : nous avons créé cet espace pour partager des podcasts qui inspirent, informent et rapprochent les auditeurs.
+    « Des mots à écouter, des univers à découvrir. »
   </blockquote>
   <p>
-    Pour vous aider à découvrir facilement nos contenus, nous avons regroupé nos podcasts en différentes catégories : Société, Santé, Inspiration, Éducation. Vous trouverez toujours les derniers épisodes en haut de chaque section.
+    Papillon Français vous propose un espace pour apprendre le français tout en découvrant des cultures variées et des histoires captivantes.
   </p>
   <p>
-    Installez-vous confortablement, écoutez, apprenez, et laissez-vous emporter par des histoires vraies et inspirantes. Bonne écoute et bienvenue dans notre univers 💜 !
+    Installez-vous confortablement, écoutez nos épisodes et laissez-vous inspirer 💛
   </p>
 </section>
-        </main>
-          <!-- Footer -->
-   <footer class="footer">
+
+</main>
+
+<!-- FOOTER -->
+ <footer class="footer">
   <div class="footer-top">
-
-<div class="footer-brand">
-  <img src="images/wave.png" alt="logo" class="footer-logo">
-
-  <div class="footer-brand-text">
-    <h2>Échos Perdus</h2>
-    <p>Amplifier les voix des femmes, une histoire à la fois.</p>
-  </div>
-</div>
-
-    <div class="footer-links">
-      <h3>Liens rapides</h3>
-      <ul>
-        <li><a href="index.html">Accueil</a></li>
-        <li><a href="apropos.html">À Propos</a></li>
-        <li><a href="episodes.html">Épisodes</a></li>
-        <li><a href="partager.html">Contact</a></li>
-      </ul>
+    <div class="footer-left">
+      <img src="images/logo2.png" alt="Papillon Français" class="footer-logo">
+      <h2>Papillon Français</h2>
     </div>
 
-    <div class="footer-info">
-      <h3>Informations</h3>
-      <ul>
-        <li><a href="mention.html">Mentions légales</a></li>
-        <li><a href="privacy.html">Politique de confidentialité</a></li>
-      </ul>
+    <div class="footer-right">
+      <h3>Suivez-nous</h3>
+      <div class="social-icons">
+        <a href="https://www.instagram.com/"><img src="images/instagram.png" alt="Instagram"></a>
+        <a href="https://www.youtube.com/"><img src="images/youtube.png" alt="YouTube"></a>
+        <a href="https://open.spotify.com/"><img src="images/spotify.png" alt="Spotify"></a>
+      </div>
     </div>
-
-    <div class="footer-social">
-  <h3>Suivez-nous</h3>
-  <div class="social-icons">
-    <a href="https://www.instagram.com/"><img src="images/instagram.png" alt="Instagram"></a>
-    <a href="https://www.youtube.com/"><img src="images/youtube.png" alt="YouTube"></a>
-    <a href="https://open.spotify.com/"><img src="images/spotify.png" alt="Spotify"></a>
-  </div>
-</div>
   </div>
 
   <div class="footer-bottom">
-    © 2025 Échos Perdus — Tous droits réservés.
+    © 2025 Papillon Français — Tous droits réservés.
   </div>
 </footer>
-    <script src="script.js"></script>
-    <script>
-  document.addEventListener("DOMContentLoaded", function() {
-  const btn = document.querySelector(".btn-left");
-  const searchInput = document.querySelector(".search-input");
-  const rows = document.querySelectorAll(".pod-categories .cat-row");
 
-  let visibleCount = 2; 
-  const increment = 2;
+<!-- Invisible audio element -->
+<audio id="player" style="display: none;">
+  <source src="" type="audio/mp4">
+</audio>
+<script src="script.js"></script>
 
-  function updateRows() {
-    const filter = searchInput.value.toLowerCase();
-
-    rows.forEach((row, i) => {
-      let hasMatch = false;
-      const titles = row.querySelectorAll(".pod-title");
-
-      titles.forEach(title => {
-        if(title.textContent.toLowerCase().includes(filter)){
-          hasMatch = true;
-        }
-      });
-
-      //If there is search show and hide
-      if(filter){
-        row.style.display = hasMatch ? "grid" : "none";
-      } else {
-        // if there is no voir button works
-        row.style.display = i < visibleCount ? "grid" : "none";
-      }
-    });
-  }
-
-  
-  updateRows();
-
-  // "Voir tous les épisodes" buton
-  btn.addEventListener("click", () => {
-    const totalRows = rows.length;
-
-    if(visibleCount < totalRows){
-      visibleCount = Math.min(visibleCount + increment, totalRows);
-      btn.textContent = visibleCount === totalRows ? "Voir moins" : "Voir tous les épisodes";
-    } else {
-      visibleCount = 2;
-      btn.textContent = "Voir tous les épisodes";
-    }
-
-    updateRows();
-  });
-
-  // search input
-  searchInput.addEventListener("keyup", updateRows);
-});
-
-</script>
 </body>
 </html>
-
- <!-- Grid des 4 podcasts principaux 
-<section class="pod-main-grid">
-
-  <article class="pod-card">
-    <img src="images/home1.jpg" alt="Cover Sacrés Accouchements">
-    <button class="play-btn" data-audio="audios/audio1.m4a">Sacrés Accouchements <span class="icon">▶</span></button>
-    <p class="pod-meta">Nouvelle émission • Thèmes : Les Accouchements</p>
-  </article>
-
-  <article class="pod-card">
-    <img src="images/home2.jpg" alt="Cover Podcast 2">
-    <button class="play-btn" data-audio="audios/audio2.m4a">Voix & Résilience <span class="icon">▶</span></button>
-    <p class="pod-meta">Récits de vie • Santé mentale</p>
-  </article>
-
-  <article class="pod-card">
-    <img src="images/home4.jpg" alt="Cover Podcast 4">
-    <button class="play-btn" data-audio="audios/audio1.m4a">Paroles de Parents <span class="icon">▶</span></button>
-    <p class="pod-meta">Parenting • Inspiration</p>
-  </article>
-</section>
- <h2>Catégories de podcasts gratuits</h2> <h3 class="cat-title">Santé</h3> -->

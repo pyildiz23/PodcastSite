@@ -1,162 +1,168 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Échos Perdus</title>
-    <link rel="stylesheet" href="global.css">
-    <link rel="stylesheet" href="style.css">
-
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Contact — Papillon Français</title>
+  <link rel="stylesheet" href="global.css">
+  <link rel="stylesheet" href="contact.css">
 </head>
 <body>
-    <nav class="navbar">
-        <a href="index.html"><img src="images/logo2.jpg" alt="logo"></a>
+<!-- NAVBAR -->
+<nav class="navbar">
+  <a href="index.html"><img src="images/logo2.png" alt="logo"></a>
+  <button class="menu-toggle">☰</button>
+  <ul class="nav-links">
+    <li><a href="index.html">Accueil</a></li>
+     <li><a href="episodes.html">Épisodes</a></li>
+    <li><a href="apropos.html">À propos</a></li>
+    <li><a href="partager.html">Contact</a></li>
+  </ul>
+</nav>
 
-          <!-- HAMBURGER BUTTON -->
-    <button class="menu-toggle">☰</button>
-        <ul class="nav-links">
-            <li><a href="index.html">Accueil</a></li>
-            <li><a href="apropos.html">À propos</a></li>
-            <li><a href="episodes.html">Épisodes</a></li>
-            <li><a href="partager.html">Contact</a></li>
-        </ul> 
-    </nav>
-    <main>
-        <section class="contact-section">
-        <h1>Partager Mon Histoire</h1>
-        <p class="contact-intro">
-        Votre voix compte. Votre histoire pourrait inspirer d'autres femmes confrontées à des défis similaires.
-      Nous serions honorés de vous entendre et potentiellement de partager votre parcours dans notre  podcast.
-        </p>
-
-  <form class="contact-form">
-
-    <label for="name">Votre Nom</label>
-    <input type="text" id="name" placeholder="Comment devons-nous vous appeler ?">
-    <p id="name-error" style="color:#d00; display:none; font-size:14px; margin-top:-10px;">
-    ⚠️ Veuillez entrer votre nom.
-    </p>
-
-  <label for="country">Pays</label>
-  
-  <div class="select-wrapper">
-  <select id="country">
-    <option value="">Choisissez votre pays</option>
-    <option value="France">France</option>
-    <option value="Belgique">Belgique</option>
-    <option value="Suisse">Suisse</option>
-    <option value="Canada">Canada</option>
-    <option value="Maroc">Maroc</option>
-    <option value="Algérie">Algérie</option>
-    <option value="Tunisie">Tunisie</option>
-    <option value="Côte d’Ivoire">Côte d’Ivoire</option>
-    <option value="Sénégal">Sénégal</option>
-    <option value="Madagascar">Madagascar</option>
-    <option value="Burkina Faso">Burkina Faso</option>
-    <option value="Niger">Niger</option>
-    <option value="Mali">Mali</option>
-    <option value="Guinée">Guinée</option>
-    <option value="Togo">Togo</option>
-    <option value="Bénin">Bénin</option>
-    <option value="Cameroun">Cameroun</option>
-    <option value="Gabon">Gabon</option>
-    <option value="Réunion">Réunion</option>
-    <option value="Autre">Autre</option>
-  </select>
-  <span class="select-icon">▼</span>
-</div>
-<p id="country-error" style="color:#d00; display:none; font-size:14px; margin-top:-10px;">
-⚠️ Veuillez choisir votre pays.
-</p>
-
-    <label for="email">Adresse Email</label>
-    <input type="email" id="email" placeholder="votre.email@exemple.com">
-    <p id="email-error" style="color:#d00; display:none; font-size:14px; margin-top:-10px;">
-    ⚠️ Veuillez entrer une adresse email valide.
-    </p>
-
-    <label for="story">Votre Histoire</label>
-    <textarea id="story" rows="7" placeholder="Racontez-nous votre histoire ..."></textarea>
-    <p id="story-error" style="color:#d00; display:none; font-size:14px; margin-top:-10px;">
-  ⚠️ Veuillez raconter votre histoire.
-   </p>
-  
-    <div class="privacy-policy">
-  <input type="checkbox" id="privacy">
-   <label for="privacy">
-    J’accepte la <a href="privacy.html" target="_blank">Politique de confidentialité</a> et le traitement de mes données personnelles.
-   </label>  
-   </div>
-   <p id="privacy-error" style="color:#d00; display:none; font-size:14px; margin-top:-10px;">
-    ⚠️ Veuillez accepter la politique de confidentialité.  
-  </p>
-  <div class="g-recaptcha" data-sitekey="6LcrlkMsAAAAAIXDRltK1eFw9B8JpYj7EysyDd7y"></div>
-<div id="captcha-error" style="display:none; color:#d00; font-size:14px; margin-top:-10px; text-align:left;">
-  ⚠️ Veuillez confirmer que vous n'êtes pas un robot.
-</div>
-    <button type="submit" class="btn-submit">Envoyer Mon Histoire</button>
-  </form>
-<p id="success-message">
-  Merci d’avoir partagé votre histoire.
-</p>
-
-
-
-  <p class="confidentialite">
-    Nous traitons chaque histoire avec soin et confidentialité.  
-    Nous vous contacterons pour discuter des prochaines étapes.
-  </p>
+<!-- HERO -->
+<section class="contact-hero">
+  <h1>Contactez-nous</h1>
+  <p>Partagez vos idées, questions ou suggestions avec nous</p>
 </section>
-       </main>
-   <footer class="footer">
+
+<main class="contact-main">
+
+  <!-- INTRO -->
+  <section class="contact-intro">
+    <h2>Nous serions ravis de vous entendre !</h2>
+    <p>
+      Que vous ayez une question, une suggestion de thème, ou que vous souhaitiez 
+      simplement partager votre expérience d'apprentissage du français, n'hésitez pas 
+      à nous écrire. Chaque message compte et nous aide à créer de meilleurs contenus pour vous.
+    </p>
+  </section>
+
+  <!-- CONTACT OPTIONS -->
+  <section class="contact-options">
+    <div class="option-card">
+      <span class="option-icon">💬</span>
+      <h3>Une question ?</h3>
+      <p>Nous répondons à toutes vos questions sur nos podcasts</p>
+    </div>
+    <div class="option-card">
+      <span class="option-icon">💡</span>
+      <h3>Une suggestion ?</h3>
+      <p>Proposez-nous des thèmes pour nos prochains épisodes</p>
+    </div>
+    <div class="option-card">
+      <span class="option-icon">🤝</span>
+      <h3>Collaboration ?</h3>
+      <p>Vous souhaitez travailler avec nous ? Contactez-nous</p>
+    </div>
+  </section>
+
+  <!-- CONTACT FORM -->
+  <section class="contact-form-section">
+    <form class="contact-form" id="contact-form">
+      
+      <div class="form-group">
+        <label for="name">Votre nom *</label>
+        <input type="text" id="name" name="name" placeholder="Entrez votre nom">
+        <span class="error-message" id="name-error">Veuillez entrer votre nom</span>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Votre email *</label>
+        <input type="email" id="email" name="email" placeholder="votre@email.com">
+        <span class="error-message" id="email-error">Veuillez entrer un email valide</span>
+      </div>
+
+      <div class="form-group">
+        <label for="subject">Sujet *</label>
+        <select id="subject" name="subject" >
+          <option value="">Sélectionnez un sujet</option>
+          <option value="question">Question générale</option>
+          <option value="suggestion">Suggestion de thème</option>
+          <option value="collaboration">Proposition de collaboration</option>
+          <option value="feedback">Retour d'expérience</option>
+          <option value="other">Autre</option>
+        </select>
+        <span class="error-message" id="subject-error">Veuillez sélectionner un sujet</span>
+      </div>
+
+      <div class="form-group">
+        <label for="message">Votre message *</label>
+        <textarea id="message" name="message" rows="6" placeholder="Écrivez votre message ici..."></textarea>
+        <span class="error-message" id="message-error">Veuillez écrire un message</span>
+      </div>
+
+      <div class="form-group checkbox-group">
+        <label class="checkbox-label">
+          <input type="checkbox" id="privacy" name="privacy">
+          <span>J'accepte que mes données soient utilisées pour répondre à ma demande *</span>
+        </label>
+        <span class="error-message" id="privacy-error">Veuillez accepter la politique de confidentialité</span>
+      </div>
+
+      <button type="submit" class="submit-btn">
+        <span class="btn-text">Envoyer le message</span>
+        <span class="btn-icon"></span>
+      </button>
+
+      <div class="success-message" id="success-message">
+        ✓ Votre message a été envoyé avec succès ! Nous vous répondrons bientôt.
+      </div>
+
+    </form>
+  </section>
+
+  <!-- ALTERNATIVE CONTACT -->
+  <section class="alt-contact">
+    <h2>Autres moyens de nous joindre</h2>
+    <div class="alt-contact-cards">
+      <div class="alt-card">
+        <span class="alt-icon"></span>
+        <h3>Email</h3>
+        <p>contact@papillonfrancais.com</p>
+      </div>
+       <!-- <div class="alt-card">
+        <span class="alt-icon"></span>
+        <h3>Réseaux sociaux</h3>
+        <div class="social-links">
+          <a href="https://www.instagram.com/" target="_blank">Instagram</a>
+          <a href="https://www.youtube.com/" target="_blank">YouTube</a>
+          <a href="https://open.spotify.com/" target="_blank">Spotify</a>
+        </div>
+      </div> -->
+    </div>
+  </section>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="footer">
   <div class="footer-top">
-
-<div class="footer-brand">
-  <img src="images/wave.png" alt="logo" class="footer-logo">
-
-  <div class="footer-brand-text">
-    <h2>Échos Perdus</h2>
-    <p>Amplifier les voix des femmes, une histoire à la fois.</p>
-  </div>
-</div>
-
-    <div class="footer-links">
-      <h3>Liens rapides</h3>
-      <ul>
-        <li><a href="index.html">Accueil</a></li>
-        <li><a href="apropos.html">À Propos</a></li>
-        <li><a href="episodes.html">Épisodes</a></li>
-        <li><a href="partager.html">Contact</a></li>
-        
-      </ul>
+    <div class="footer-left">
+      <img src="images/logo2.png" alt="Papillon Français" class="footer-logo">
+      <h2>Papillon Français</h2>
     </div>
 
-    <div class="footer-info">
-      <h3>Informations</h3>
-      <ul>
-        <li><a href="mention.html">Mentions légales</a></li>
-        <li><a href="privacy.html">Politique de confidentialité</a></li>
-      </ul>
+    <div class="footer-right">
+      <h3>Suivez-nous</h3>
+      <div class="social-icons">
+        <a href="https://www.instagram.com/"><img src="images/instagram.png" alt="Instagram"></a>
+        <a href="https://www.youtube.com/"><img src="images/youtube.png" alt="YouTube"></a>
+        <a href="https://open.spotify.com/"><img src="images/spotify.png" alt="Spotify"></a>
+      </div>
     </div>
-
-    <div class="footer-social">
-  <h3>Suivez-nous</h3>
-  <div class="social-icons">
-    <a href="https://www.instagram.com/"><img src="images/instagram.png" alt="Instagram"></a>
-    <a href="https://www.youtube.com/"><img src="images/youtube.png" alt="YouTube"></a>
-    <a href="https://open.spotify.com/"><img src="images/spotify.png" alt="Spotify"></a>
-  </div>
-</div>
   </div>
 
   <div class="footer-bottom">
-    © 2025 Échos Perdus — Tous droits réservés.
+    © 2025 Papillon Français — Tous droits réservés.
   </div>
 </footer>
-    <script src="script.js"></script>
-   <script src="https://www.google.com/recaptcha/api.js?hl=fr" async defer></script>
 
+<!-- Invisible audio element -->
+<audio id="player" style="display: none;">
+  <source src="" type="audio/mp4">
+</audio>
+
+<script src="script.js"></script>
 </body>
 </html>
-
-

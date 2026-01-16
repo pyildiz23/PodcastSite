@@ -1,178 +1,129 @@
 <!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Échos Perdus</title>
-    <link rel="stylesheet" href="global.css">
-    <link rel="stylesheet" href="apropos.css">
-
-    <!-- Tailwind (utilities only, optional) -->
-  <script src="https://cdn.tailwindcss.com"></script>
-  <!-- D3 -->
-  <script src="https://d3js.org/d3.v7.min.js"></script>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Papillon Français</title>
+  <link rel="stylesheet" href="global.css">
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <nav class="navbar">
-         <a href="index.html"> <img src="images/logo2.jpg" alt="logo"></a>
 
-          <!-- HAMBURGER BUTTON -->
-    <button class="menu-toggle">☰</button>
-        <ul class="nav-links">
-            <li><a href="index.html">Accueil</a></li>
-            <li><a href="apropos.html">À propos</a></li>
-            <li><a href="episodes.html">Épisodes</a></li>
-            <li><a href="partager.html">Contact</a></li>
-          
-        </ul>
-        
-    </nav>
-    <main>
-<section id="accueil" class="banner">
-  <div class="banner-content">
-    <!-- <h1>À propos</h1> 
- <p> Échos Perdus est né d’un besoin simple mais essentiel : écouter les voix que l’on oublie trop souvent. 
-    Celles des femmes, des mères, des exilées, de toutes celles qui avancent dans le silence, 
-    avec courage et résilience. </p> -->
-  </div>
+<!-- NAVBAR -->
+<nav class="navbar">
+  <a href="index.html"><img src="images/logo2.png" alt="logo"></a>
+  <button class="menu-toggle">☰</button>
+  <ul class="nav-links">
+    <li><a href="index.html">Accueil</a></li>
+     <li><a href="episodes.html">Épisodes</a></li>
+    <li><a href="apropos.html">À propos</a></li>
+    <li><a href="partager.html">Contact</a></li>
+  </ul>
+</nav>
+
+<!-- HERO SECTION -->
+<section class="apropos-hero">
+  <h1>À propos de Papillon Français</h1>
+  <p>Apprenez le français avec passion et plaisir</p>
 </section>
- <!-- <section class="apro-hero"> <h1>À propos</h1> 
-  <p> Echo des Oubliées est né d’un besoin simple mais essentiel : écouter les voix que l’on oublie trop souvent. 
-    Celles des femmes, des mères, des exilées, de toutes celles qui avancent dans le silence, 
-    avec courage et résilience. </p> </section>  -->
-    <section class="apro-histoire">
-       <h2>Notre histoire</h2> 
-       <p> Tout a commencé avec une envie : créer un espace où chaque femme peut être entendue, reconnue et respectée. 
-        Episode après épisode, témoignage après témoignage, Echo des Oubliées est devenu bien plus qu’un simple projet. 
-        C’est un refuge, un lieu de partage et de transmission, un pont entre des vies différentes mais profondément humaines. 
 
+<!-- NOTRE MISSION -->
+<section class="intro">
+  <h2>Notre Mission</h2>
+  <p>
+    Papillon Français est né d'une passion : rendre l'apprentissage du français 
+    accessible, captivant et authentique. Nous croyons que la langue française 
+    ne se limite pas à des règles grammaticales, mais qu'elle est une porte 
+    d'entrée vers une culture riche, une gastronomie raffinée et des histoires 
+    fascinantes.
   </p>
-</section> 
-
-<!-- <section class="apro-valeurs"> <h2>Nos valeurs</h2>
-   <ul> 
-    <li><strong>Empathie :</strong> écouter sans juger, accueillir chaque parcours.</li> 
-    <li><strong>Respect :</strong> protéger les histoires confiées.</li> 
-    <li><strong>Sororité :</strong> créer des liens entre femmes, visibles ou invisibles.</li> 
-  </ul> 
-</section>  -->
-<section class="recent-podcasts">
-    <h2>Nos valeurs</h2>
-    <div class="podcast-cards">
-        <div class="podcast-card">
-             <img src="images/empatie.jpg" alt="empathiecover">
-            <p><strong>Empathie :</strong> écouter sans juger, accueillir chaque parcours.</p>
-        </div>
-        <div class="podcast-card">
-             <img src="images/accueil33.JPG" alt="respectcover">
-            <p><strong>Respect :</strong> protéger les histoires confiées.</p>
-        </div>
-        <div class="podcast-card">
-            <img src="images/sororite.jpg" alt="sororitecover">
-            <p><strong>Sororité :</strong> créer des liens entre femmes, visibles ou invisibles.</p>
-        </div>
-              <!--  <div class="podcast-card">
-            <img src="images/home4.jpg" alt="podcastcover">
-            <a href="podcasts.html">Épisode 9: Cheveux afros, braids, perruques : identité ou camouflage ?</a>
-            <button>Culture</button>
-        </div>
-    </div>
-   <a href="podcasts.html"><button class="btn">Voir tous les épisodes</button></a> -->
+  <p>
+    Nos podcasts sont conçus pour les apprenants de niveau B1-B2 qui souhaitent 
+    progresser tout en découvrant la France sous toutes ses facettes.
+  </p>
 </section>
-<section class="apro-vision"> <h2>Notre vision</h2> <p>Nous croyons que chaque récit, même le plus simple, 
-  même le plus discret, peut éclairer une autre vie. Nous voulons construire un média humain, doux, profondément ancré dans la réalité des 
-  femmes d’aujourd’hui. Un média qui inspire, soutient et libère la parole. </p> </section> 
-<section class="apro-datas">
-  <h3>Violences conjugales: chiffres clés</h3>
-  <div class="data-cards">
-    <!-- Visualisation 1 -->
-    <div class="data-card">
-      <img src="images/visu1.jpg" alt="Visualisation 1">
-      <p>Le silence domine. Presque la moitié des victimes (47 %) choisissent de ne le dire à personne après la violence. Seul un pourcentage minime (3,2 %) fait un signalement à la police ou à la gendarmerie.</p>
-      <a href="https://mobile.interieur.gouv.fr/Interstats/L-enquete-GENESE" target="_blank">Lien vers la source</a>
-    </div>
 
-    <!-- Visualisation 2 -->
-    <div class="data-card">
-      <img src="images/visu2.jpg" alt="Visualisation 2">
-      <p>La forte hausse des signalements est majoritairement due aux victimes qui dénoncent des faits anciens (la courbe la plus haute). Cela prouve une libération de la parole et une augmentation de la confiance dans le système.</p>
-      <a href="https://mobile.interieur.gouv.fr/Interstats/Infractions-et-sentiment-d-insecurite/Violences-physiques-ou-sexuelles/Conjugales/Info-rapide-n-56-Les-violences-conjugales-enregistrees-par-les-services-de-securite-quasi-stabilisation-en-2024" target="_blank">Lien vers la source</a>
+<!-- POURQUOI PAPILLON? -->
+<section class="why-section">
+  <h2>Pourquoi "Papillon" ?</h2>
+  <div class="why-cards">
+    <div class="why-card">
+      <span class="icon">🦋</span>
+      <h3>Transformation</h3>
+      <p>Comme le papillon, vous évoluez à chaque épisode</p>
     </div>
-
-    <!-- Visualisation 3 -->
-    <div class="data-card">
-      <img src="images/visu3.jpg" alt="Visualisation 3">
-      <p>Cette visualisation est essentielle pour démystifier le mythe de l'agresseur « inconnu dans une ruelle sombre ». Dans la grande majorité des cas, l'agresseur est connu de la victime : il s'agit le plus souvent du conjoint, de l'ex-conjoint, ou d'une connaissance (91% des cas).</p>
-      <a href="https://arretonslesviolences.gouv.fr/sites/default/files/2022-11/Lettre%20n%C2%B018%20-%20Les%20violences%20au%20sein%20du%20couple%20et%20les%20violences%20sexuelles%20en%202021.pdf" target="_blank">Lien vers la source</a>
+    <div class="why-card">
+      <span class="icon">🌍</span>
+      <h3>Liberté</h3>
+      <p>Apprenez où vous voulez, quand vous voulez</p>
+    </div>
+    <div class="why-card">
+      <span class="icon">🎨</span>
+      <h3>Beauté</h3>
+      <p>Découvrez la richesse de la langue française</p>
     </div>
   </div>
-  <!-- Lightbox modal -->
-<div id="lightbox" class="lightbox">
-  <span class="close">&times;</span>
-  <img class="lightbox-content" id="lightbox-img">
-</div>
-
 </section>
-<div id="apropos-section">
-  <div id="page-header" class="p-3 text-center text-white font-bold">
-    <h2>Expériences difficiles auxquelles des femmes sont confrontées</h2>
+
+<!-- CE QUE VOUS TROUVEREZ -->
+<section class="intro">
+  <h2>Ce que vous trouverez ici</h2>
+  <ul style="text-align: left; max-width: 800px; margin: 20px auto; line-height: 1.8;">
+    <li>Des conversations authentiques sur la culture française</li>
+    <li>Des explorations culinaires et gastronomiques</li>
+    <li>Des récits de voyages à travers la France</li>
+    <li>Des expressions françaises expliquées avec humour</li>
+    <li>Des conseils pour améliorer votre français au quotidien</li>
+  </ul>
+</section>
+
+<!-- QUI SOMMES-NOUS? (optionnel si vous voulez parler de l'équipe) 
+<section class="team-section">
+  <h2>L'équipe</h2>
+  <div class="team-cards">
+    <div class="team-card">
+      <div class="team-avatar">👤</div>
+      <h3>Nom du Host</h3>
+      <p>Passionné de pédagogie et de culture française, [Nom] vous guide 
+         à travers chaque épisode avec enthousiasme et authenticité.</p>
+    </div>
   </div>
-   <div class="square-wrapper">
-  <div id="chart-container"></div>
+</section>-->
+
+<!-- REJOIGNEZ-NOUS -->
+<section class="cta-section">
+  <h2>Rejoignez la communauté Papillon Français</h2>
+  <p>Écoutez nos podcasts, partagez vos impressions et progressez avec nous !</p>
+  <div class="cta-buttons">
+    <a href="episodes.html"><button class="buton">Écouter les épisodes</button></a>
+    <a href="partager.html"><button class="buton">Nous contacter</button></a>
   </div>
-</div>
+</section>
 
-<section class="apro-cta"> <h3>Envie de nous écrire ?</h3> <p>Vous souhaitez partager votre histoire, proposer un sujet ou simplement nous laisser un message ?
-
-</p> <a href="partager.html" class="cta-btn">Nous contacter</a> </section>
-
-
-        </main>
-   <footer class="footer">
+<!-- FOOTER (aynı) -->
+ <footer class="footer">
   <div class="footer-top">
-
-<div class="footer-brand">
-  <img src="images/wave.png" alt="logo" class="footer-logo">
-
-  <div class="footer-brand-text">
-    <h2>Échos Perdus</h2>
-    <p>Amplifier les voix des femmes, une histoire à la fois.</p>
-  </div>
-</div>
-
-    <div class="footer-links">
-      <h3>Liens rapides</h3>
-      <ul>
-        <li><a href="index.html">Accueil</a></li>
-        <li><a href="apropos.html">À Propos</a></li>
-        <li><a href="episodes.html">Épisodes</a></li>
-        <li><a href="partager.html">Contact</a></li>
-       
-      </ul>
+    <div class="footer-left">
+      <img src="images/logo2.png" alt="Papillon Français" class="footer-logo">
+      <h2>Papillon Français</h2>
     </div>
 
-    <div class="footer-info">
-      <h3>Informations</h3>
-      <ul>
-        <li><a href="mention.html">Mentions légales</a></li>
-        <li><a href="privacy.html">Politique de confidentialité</a></li>
-      </ul>
+    <div class="footer-right">
+      <h3>Suivez-nous</h3>
+      <div class="social-icons">
+        <a href="https://www.instagram.com/"><img src="images/instagram.png" alt="Instagram"></a>
+        <a href="https://www.youtube.com/"><img src="images/youtube.png" alt="YouTube"></a>
+        <a href="https://open.spotify.com/"><img src="images/spotify.png" alt="Spotify"></a>
+      </div>
     </div>
-
-    <div class="footer-social">
-  <h3>Suivez-nous</h3>
-  <div class="social-icons">
-    <a href="https://www.instagram.com/"><img src="images/instagram.png" alt="Instagram"></a>
-    <a href="https://www.youtube.com/"><img src="images/youtube.png" alt="YouTube"></a>
-    <a href="https://open.spotify.com/"><img src="images/spotify.png" alt="Spotify"></a>
-  </div>
-</div>
   </div>
 
   <div class="footer-bottom">
-    © 2025 Échos Perdus — Tous droits réservés.
+    © 2025 Papillon Français — Tous droits réservés.
   </div>
 </footer>
-    <script src="script.js"></script>
+
+<audio id="player" style="display: none;"></audio>
+<script src="script.js"></script>
 </body>
 </html>
